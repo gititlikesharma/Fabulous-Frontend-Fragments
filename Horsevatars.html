@@ -1,0 +1,134 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horsevatars - Avatar Playground For Frontend Horse</title>
+    <meta property="og:title" content="Horsevatars - Playground For Frontend Horse" />
+    <meta name="twitter:title" content="Horsevatars - Playground For Frontend Horse" />
+    <meta name="description" content="Playing around with making avatars for Frontend Horse" />
+    <meta property="og:description" content="Playing around with making avatars for Frontend Horse" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        background: #222;
+        color: #fff;
+      }
+      header {
+        padding-top: 18px;
+        padding-bottom: 4px;
+        width: 100%;
+        max-width: 64ch;
+        margin: 0 auto;
+        border-bottom: 1px solid #888;
+      }
+      main {
+        width: 100%;
+        max-width: 64ch;
+        margin: 0 auto;
+      }
+      footer {
+        width: 100%;
+        max-width: 64ch;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 60px;
+        padding-bottom: 12px;
+        font-size: 0.9rem;
+      }
+      a {
+        text-decoration: none;
+      }
+      .pallet1 {
+        background-color: #6b705c;
+        color: #ffe8d6;
+      }
+      .pallet1 a {
+        color: #b7b7a4;
+      }
+      .pallet1 footer {
+        color: #a5a58d;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .container div {
+        width: 100px;
+      }
+    </style>
+    <script type="text/javascript">
+      const settings = {
+        head: 1,
+        nose: 1,
+        body: 1,
+        hair: 1,
+      }
+      function handleChange(event) {
+        settings[event.target.name] = event.target.value
+        // console.log(settings)
+        document.getElementById('image_preview').src =
+          'https://res.cloudinary.com/awsimages/image/upload/v1649191035/horsevatars/generation-in-progress.png'
+        // const new_url = `https://res.cloudinary.com/awsimages/image/upload/c_fill,w_1044,h_1230/l_horsevatars:body-${settings.body}/fl_layer_apply/l_horsevatars:nose-${settings.nose}/fl_layer_apply/l_horsevatars:hair-${settings.hair}/fl_layer_apply/l_horsevatars:head-${settings.head}/fl_layer_apply/1x1-pixels/1x1-transparent.png`
+        const new_url = `https://res.cloudinary.com/awsimages/image/upload/c_fill,w_104,h_123/l_horsevatars:body-${settings.body},c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:nose-${settings.nose},c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:hair-${settings.hair},c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:head-${settings.head},c_fill,w_104,h_123/fl_layer_apply/1x1-pixels/1x1-transparent.png`
+        console.log(new_url)
+        document.getElementById('image_preview').src = new_url
+      }
+      function doStuff() {
+        document.addEventListener('change', handleChange)
+      }
+      document.addEventListener('DOMContentLoaded', doStuff)
+    </script>
+  </head>
+  <body>
+    <main>
+      <p>Note: It can take a few seconds to render a change</p>
+      <div id="image_container">
+        <img
+          id="image_preview"
+          src="https://res.cloudinary.com/awsimages/image/upload/c_fill,w_104,h_123/l_horsevatars:body-1,c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:nose-1,c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:hair-1,c_fill,w_104,h_123/fl_layer_apply/l_horsevatars:head-1,c_fill,w_104,h_123/fl_layer_apply/1x1-pixels/1x1-transparent.png"
+        />
+      </div>
+      <form>
+        <div class="container">
+          <div>
+            <label for="head"> Head: </label><br />
+            1 <input type="radio" name="head" value="1" checked /><br />2
+            <input type="radio" name="head" value="2" /><br />3
+            <input type="radio" name="head" value="3" /><br />
+            4 <input type="radio" name="head" value="4" /><br />
+            5 <input type="radio" name="head" value="5" />
+          </div>
+          <div>
+            <label for="body">Body: </label><br />
+            1 <input type="radio" name="body" value="1" checked /><br />2
+            <input type="radio" name="body" value="2" /><br />3
+            <input type="radio" name="body" value="3" /><br />
+            4 <input type="radio" name="body" value="4" /><br />
+            5 <input type="radio" name="body" value="5" />
+          </div>
+          <div>
+            <label for="nose">Nose: </label><br />
+            1 <input type="radio" name="nose" value="1" checked /><br />2
+            <input type="radio" name="nose" value="2" /><br />3
+            <input type="radio" name="nose" value="3" /><br />
+            4 <input type="radio" name="nose" value="4" /><br />
+            5 <input type="radio" name="nose" value="5" />
+          </div>
+          <div>
+            <label for="hair">Hair: </label><br />
+            1 <input type="radio" name="hair" value="1" checked /><br />2
+            <input type="radio" name="hair" value="2" /><br />3
+            <input type="radio" name="hair" value="3" /><br />
+            4 <input type="radio" name="hair" value="4" /><br />
+            5 <input type="radio" name="hair" value="5" />
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

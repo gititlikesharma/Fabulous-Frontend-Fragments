@@ -1,0 +1,215 @@
+<html>
+<head>
+<title>Character Charades</title>
+</head>
+<body>
+ <div class="panel controls-panel">
+  <label class="control">
+    Character:
+    <input type="text" id="character" value="---" />
+  </label>
+  <label class="control">
+    Count:
+    <input type="range" id="count" min="1" max="1000" value="500" />
+  </label>
+  <label class="control">
+    Initial angle:
+    <input type="range" id="initialAngle" min="-90" max="90" step="1" value="-45" />
+  </label>
+  <label class="control">
+    Step:
+    <input type="range" id="step" min="-45" max="45" step="0.01" value="-45" />
+  </label>
+  <label class="control">
+    Width:
+    <input type="range" id="width" min="100" max="1000" value="500" />
+  </label>
+  <label class="control">
+    Height:
+    <input type="range" id="height" min="100" max="1000" value="500" />
+  </label>
+  <label class="control">
+    Background:
+    <input type="color" id="background" value="#ffffff" />
+  </label>
+  <label class="control">
+    Color:
+    <input type="color" id="color" value="#000000" />
+  </label>
+  <label class="control">
+    X gap:
+    <input type="range" id="x-gap" min="-10" max="100" value="-8" />
+  </label>
+  <label class="control">
+    Y gap:
+    <input type="range" id="y-gap" min="0" step="0.1" max="10" value="0.9" />
+  </label>
+</div>
+<div class="panel canvas-panel">
+  <div class="questions" id="questions-container"></div>
+</div>
+</body>
+<style>
+ :root {
+  --canvas-width: 60vmin;
+  --canvas-height: 60vmin;
+  --background: #ffffff;
+  --color: #000000;
+  --x-gap: unset;
+  --y-gap: 1;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vmin;
+  background: var(--background);
+}
+@media (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
+}
+.controls-panel {
+  width: 240px;
+  height: var(--canvas-height);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #ddd;
+}
+.canvas-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .canvas-panel {
+    align-items: flex-start;
+  }
+}
+.questions {
+  width: var(--canvas-width);
+  height: var(--canvas-height);
+  color: var(--color);
+  overflow: hidden;
+}
+.question {
+  display: inline-block;
+  transform: rotate(var(--angle));
+  font: 100 5vmin/1 normal arial, sans-serif;
+  line-height: var(--y-gap);
+  letter-spacing: var(--x-gap);
+}
+.control {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+<script>
+const { floor, random } = Math
+const query = document.querySelector.bind(document)
+const setCSSProperty = (key, value) => {
+  document.documentElement.style.setProperty(key, value)
+}
+const createQuestion = ({ angle, character }) => {
+  return `
+    <span class="question" style="--angle: ${angle}deg">
+      ${character}
+    </span>
+  `
+}
+const createQuestions = ({ count, step, initialAngle, character }) => {
+  const questions = []
+  let i = 0;
+  let angle = initialAngle
+  while (i++ < count) {
+    angle += step
+    const question = createQuestion({ angle, character })
+    questions.push(question)
+  }
+  return questions.join('')
+}
+const render = () => {
+  container.innerHTML = createQuestions(state)
+}
+const state = {
+  count: 500,
+  step: -45,
+  character: "---",
+  initialAngle: floor(random() * 360)
+}
+const container = query('#questions-container')
+const controls = [
+  {
+    id: 'count',
+    handler: value => parseInt(value, 10)
+  },
+  {
+    id: 'step',
+    handler: value => parseInt(value, 10)
+  },
+  {
+    id: 'initialAngle',
+    handler: value => parseInt(value, 10)
+  },
+  { id: 'character' },
+  {
+    id: 'width',
+    handler: value => {
+      setCSSProperty('--canvas-width', `${value}px`)
+      return `${value}px`
+    }
+  },
+  {
+    id: 'height',
+    handler: value => {
+      setCSSProperty('--canvas-height', `${value}px`)
+      return `${value}px`
+    }
+  },
+  {
+    id: 'background',
+    handler: value => {
+      setCSSProperty('--background', value)
+      return value
+    }
+  },
+  {
+    id: 'color',
+    handler: value => {
+      setCSSProperty('--color', value)
+      return value
+    }
+  },
+  {
+    id: 'x-gap',
+    handler: value => {
+      setCSSProperty('--x-gap', `${value}px`)
+      return `${value}px`
+    }
+  },
+  {
+    id: 'y-gap',
+    handler: value => {
+      setCSSProperty('--y-gap', value)
+      return value
+    }
+  },
+]
+controls.forEach(({ id, handler = _ => _ }) => {
+  const element = query(`#${id}`)
+  element.addEventListener('input', (e) => {
+    const value = e.currentTarget.value
+    state[id] = handler(value)
+    render()
+  })
+})
+render()
+</script>
+</html>

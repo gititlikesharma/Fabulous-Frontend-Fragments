@@ -1,0 +1,193 @@
+<html>
+<head>
+<title>Check Duplicate String</title>
+</head>
+<body>
+<div id="characters">  abcdefghijklmnopqrstuvwxyz1234567890~`!@#$%^&*()_+:</div>
+<div id="container">
+  <form class="input">
+    <input type="text" placeholder="Enter String" id="textInput" />
+    <button>Check Duplication</button>
+  </form>
+  <p id="text"></p>
+  <p id="correct" class="message"> No Duplicate/s Found :)</p>
+  <p id="duplicate" class="message">Duplicate/s Found :(</p>
+</div>
+</body>
+<style>
+ @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
+* {
+  font-family: "Ubuntu Mono", monospace;
+  margin: 0;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #e7e7e7;
+}
+.character {
+  position: absolute;
+  font-size: 5rem;
+  color: #00000034;
+  transition: all 5s linear;
+}
+#container {
+  position: relative;
+  z-index: 2;
+  background-color: #dedbde8c;
+  border: 1px solid #fff;
+  backdrop-filter: blur(5px);
+  width: 400px;
+  border-radius: 50px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.input {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input > * {
+  padding: 20px 30px;
+  border: none;
+  outline: none;
+  background-color: #fbcfcf;
+}
+.input input {
+  width: 300px;
+  padding: 30px 20px;
+  font-size: 1.3rem;
+  border-radius: 50rem;
+}
+.input button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+  border-radius: 0 0 10px 10px;
+  background-color: #c35a5a;
+}
+.input button:hover {
+  background-color: #e6c1c1;
+}
+#text {
+  background-color: #fbcfcf;
+  margin: 50px 0;
+  max-width: 75%;
+  font-size: 1.5rem;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  padding: 20px;
+  font-weight: 800;
+  border-radius: 10px;
+}
+.duplicate {
+  color: #c35a5a;
+  animation: shake 1s infinite linear;
+  display: inline-block;
+}
+@keyframes shake {
+  0% {
+    transform: translate(0.5px, 0.5px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-0.5px, -1px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-1.5px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(1.5px, 1px) rotate(0deg);
+  }
+  40% {
+    transform: translate(0.5px, -0.5px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-0.5px, 1px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-1.5px, 0.5px) rotate(0deg);
+  }
+  70% {
+    transform: translate(1.5px, 0.5px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-0.5px, -0.5px) rotate(1deg);
+  }
+  90% {
+    transform: translate(0.5px, 1px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0.5px, -1px) rotate(-1deg);
+  }
+}
+.message {
+  display: none;
+  font-size: 1.1rem;
+}
+#duplicate {
+  color: #c35a5a;
+}
+#correct {
+  color: #259b3f;
+}
+</style>
+<script>
+console.clear();
+const textValue = document.querySelector("#text");
+const input = document.querySelector("#textInput");
+const form = document.querySelector("form");
+const duplicateMessage = document.querySelector("#duplicate");
+const correctMessage = document.querySelector("#correct");
+const checkText = (text) => {
+  if (new Set(text.split("")).size === text.split("").length) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const highlightText = (text) => {
+  duplicateMessage.style.display = "none";
+  correctMessage.style.display = "none";
+  textValue.innerHTML = "";
+  for (i of text) {
+    let count = text.split("").filter((c) => c == i).length;
+    if (count >= 2) {
+      textValue.innerHTML += `<span class="duplicate">${i}</span>`;
+    } else {
+      textValue.innerHTML += `<span>${i}</span>`;
+    }
+  }
+  checkText(text)
+    ? (correctMessage.style.display = "block")
+    : (duplicateMessage.style.display = "block");
+};
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  highlightText(input.value);
+});
+const characterContainer = document.querySelector("#characters");
+const characters = characterContainer.innerText.split("");
+characterContainer.innerHTML = "";
+characters.forEach((character) => {
+  const characterSpan = document.createElement("span");
+  characterSpan.className = "character";
+  characterSpan.innerText = character;
+  characterContainer.appendChild(characterSpan);
+  characterSpan.style.top = `${Math.floor(Math.random() * 100)}%`;
+  characterSpan.style.left = `${Math.floor(Math.random() * 100)}%`;
+  setInterval(() => {
+    characterSpan.style.top = `${Math.floor(Math.random() * 100)}%`;
+    characterSpan.style.left = `${Math.floor(Math.random() * 100)}%`;
+  }, 5000);
+});
+</script>
+</html>

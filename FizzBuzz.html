@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>FizzBuzz</title>
+</head>
+<body>
+<h1>Is it Fizz or Buzz?</h1>
+<p>
+  Type in a number and find out. 
+  <br><em>Try 3, 5, or 15 or something else</em> 
+  <br>👇
+</p>
+<form>
+  <label for="number"></label>
+  <input id="number" type="text">
+  <button type="submit" id="the-button">What is it?</button>
+</form>
+<h2>It's <span id="result">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> !</h2>
+<small>
+  <h3>What is FizzBuzz?</h3>
+    FizzBuzz is a very simple programming task, used in software developer job interviews, to determine whether the job candidate can actually write code. It was invented by Imran Ghory, and popularized by Jeff Atwood. Here is a description of the task: <em>Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”.</em>
+  <br><br>
+</small>
+</body>
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  margin: 2em;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 750px) {
+  body {
+    font-size: 12px;
+  }
+}
+h1 {
+  font-size: 5em;
+  margin-bottom: 0;
+}
+h2 {
+  width: max-content;
+  margin: 5rem auto;
+  padding: 2rem 4rem;
+  font-size: 5em;
+  color: #fff;
+  background-color: #000;
+  transform: rotate(-2deg);
+  border-radius: .25em;
+}
+p {
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+}
+input {
+  border: solid 4px #000;
+  border-radius: .5em;
+  padding: .5rem 1rem;
+  margin-right: .5em;
+  max-width: 4em;
+  font-size: 2em;
+  text-align: center;
+}
+input:focus {
+  outline: none;
+  border: solid 5px #000;
+}
+button {
+  border: solid 4px #000;
+  border-radius: .5em;
+  color: #fff;
+  background-color: #000;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 1rem 2rem;
+}
+#result {
+  text-decoration: underline;
+  cursor: pointer;
+}
+small {
+  display: block; 
+  width: 70%; 
+  margin: 0 auto;
+  line-height: 1.8;
+}
+</style>
+<script>
+let numberInput = document.getElementById('number'); 
+let button = document.getElementById('the-button');
+let resultBox = document.getElementById('result');
+let fizzBuzz = function(n) {
+        if(n % 3 == 0 && n % 5 == 0) {
+          console.log(`${n} is FizzBuzz`);
+          return 'FizzBuzz';
+        } else if (n % 3 == 0) {
+             console.log(`${n} is Fizz`);
+             return 'Fizz';
+        } else if (n % 5 == 0) {
+             console.log(`${n} is Buzz`);
+              return 'Buzz';
+        } else {
+          console.log(`${n} is not Fizz or Buzz`);
+          return 'not Fizz or Buzz';
+};
+        } 
+let whatIsIt = function(event) {
+  event.preventDefault();
+  let theNumber = numberInput.value;
+  numberInput.value = '';
+  let whatItIs = fizzBuzz(theNumber);
+  resultBox.textContent = whatItIs;
+}
+let clearResult = function() {
+  result.innerHTML = '<span id="result">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+}
+button.addEventListener('click', whatIsIt);
+numberInput.addEventListener('submit', whatIsIt);
+resultBox.addEventListener('click', clearResult);
+var fizzBuzz100 = function(n) {
+    n = 100;
+    for(let i = 1; i <= n; i++) {
+      let fizz = i % 3 == 0;
+      let buzz = i % 5 == 0;      
+          if(i % 3 == 0 && i % 5 == 0) {
+        console.log('FizzBuzz');
+    } else if (i % 3 == 0) {
+        console.log('Fizz'); 
+    } else if (i % 5 == 0) {
+        console.log('Buzz');
+    } else {
+        console.log(i);
+    }
+  } 
+};
+fizzBuzz100();
+</script>
+</html>

@@ -1,0 +1,74 @@
+<html>
+<head>
+	<title>A Web 'App' without any Javascript!</title>
+	<style>
+		body {
+			font-size: calc(1em + 1vw);
+			font-family: sans-serif;
+			max-width: 40em;
+			margin: 0 auto;
+		}
+		h4 {
+			text-align: center;
+			background-color: #666;
+			height: 30px;
+			margin: 0 auto;
+			color: #fff;
+			padding: 10px 0;
+		}
+		nav {
+			text-align: center;
+			padding: 0.5em 0;
+			border-bottom: 2px solid;
+		}
+		nav li {
+			display: inline-block;
+			margin: 0 0.5em;
+		}
+		main > * {
+			display: none;
+		}
+		main > *:last-child {
+			display: block;
+		}
+		@keyframes pulse {
+			0% { transform: scale(1) }
+			50% { transform: scale(1.05) }
+			100% { transform: scale(1) }
+		}
+		main > *:target {
+			display: block;
+			animation: pulse 0.5s linear 1;
+		}
+		main > *:target ~ * {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<h4>
+		A Web 'App' without any Javascript!
+	</h4>
+	<nav role="navigation">
+		<ul>
+			<li><a href="#the-default-view">the default view</a></li>
+			<li><a href="#some-view">some view</a></li>
+			<li><a href="#another-view">another view</a></li>
+		</ul>
+	</nav>
+	<main role="main">
+		<div id="some-view">
+			<h1>Some view</h1>
+			<p>This is one of any number of views that are reachable by linking to its <code>id</code> / hash identifier.</p>
+		</div>
+		<div id="another-view">
+			<h1>Another view</h1>
+			<p>This is one of any number of views that are reachable by linking to its <code>id</code> / hash identifier.</p>
+		</div>
+		<div id="the-default-view">
+			<h1>The default view</h1>
+			<p>This view is visible by default when the user first arrives at the app.</p>
+		</div>
+	</main>
+</body>
+</html>

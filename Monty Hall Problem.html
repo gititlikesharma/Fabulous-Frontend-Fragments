@@ -1,0 +1,84 @@
+<html lang=en>
+<head>
+    <title>Monty Hall Problem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="cyan">
+    <script>
+        "use strict";
+        let wins = 0;
+        let games = 0;
+        let selected;
+        let prize;
+        function init() {
+            selected = -1;
+            prize = Math.floor(Math.random() * 3);
+            for (let i in [0, 1, 2]) {
+                document.getElementById(i).innerText = "?";
+            }
+            document.getElementById('reset').innerText = "";
+        }
+        function play(i) {
+            if (selected == -1) {
+                // No door selected. Reveal a losing choice other than this door.
+                // This looks like a wasteful way to do this, but you don't want the
+                // outcome to be deterministic in situations where the player made
+                // the right choice on the first guess.
+                let show;
+                do {
+                    show = Math.floor(Math.random() * 3);
+                } while (show == i || show == prize);
+                selected = i;
+                document.getElementById(show).innerText = "🐐";
+            } else if (selected == Infinity) {
+                // The player previously their second choice and we have revealed the
+                // solution. Reset the game.
+                init();
+            } else {
+                // The player has made their second guess (same or different as before).
+                // Reveal their prize.
+                if (i == prize) {
+                    document.getElementById(i).innerText = "💰";
+                    wins++;
+                } else {
+                    document.getElementById(i).innerText = "🐐";
+                }
+                games++;
+                selected = Infinity;
+                document.getElementById('result').innerText = `Player won ${wins} out of ${games} (${wins/games}).`;
+                document.getElementById('reset').innerText = "Click any door to reset the game.";
+            }
+        }
+    </script>
+    <style>
+        label {
+            width: 120px;
+            display: inline-block;
+        }
+    </style>
+    <style>
+        button {
+            width: 120px;
+            height: 90px;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body style="background-color:lightcyan" onload='init();'>
+<h1>Monty Hall</h1>
+<div>
+First, the contestent chooses a door.
+Second, the host reveals a non-prize behind one of the other two doors.
+Third, the contestent can choose to keep with their original choice or change.
+</div>
+<table>
+    <tr>
+        <td><button id=0 onclick='play(0);'></button></td>
+        <td><button id=1 onclick='play(1);'></button></td>
+        <td><button id=2 onclick='play(2);'></button></td>
+    </tr>
+</table>
+<div id=result></div>
+<div id=reset></div>
+</body>
+</html>

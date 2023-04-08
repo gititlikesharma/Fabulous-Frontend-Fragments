@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2D Transforms in CSS</title>
+<script>
+var transform = [ 1, 0, 0, 0, 1, 0, 0, 0, 1];  
+function crossProduct3x3(m1, m2) {
+    // this function only works for two 3x3 square matrices
+    var p = new Array(9);
+    p[0] = m1[0] * m2[0] + m1[1] * m2[3] + m1[2] * m2[6];
+    p[1] = m1[0] * m2[1] + m1[1] * m2[4] + m1[2] * m2[7];
+    p[2] = m1[0] * m2[2] + m1[1] * m2[5] + m1[2] * m2[8];
+    p[3] = m1[3] * m2[0] + m1[4] * m2[3] + m1[5] * m2[6];
+    p[4] = m1[3] * m2[1] + m1[4] * m2[4] + m1[5] * m2[7];
+    p[5] = m1[3] * m2[2] + m1[4] * m2[5] + m1[5] * m2[8];
+    p[6] = m1[6] * m2[0] + m1[7] * m2[3] + m1[8] * m2[6];
+    p[7] = m1[6] * m2[1] + m1[7] * m2[4] + m1[8] * m2[7];
+    p[8] = m1[6] * m2[2] + m1[7] * m2[5] + m1[8] * m2[8];
+    return p;
+}
+function formatMatrix(m) {
+    // assume m is an array representing a row-major 3x3 matrix
+    return "matrix(" + m[0] + "," + m[3] + "," + m[1] + "," +
+            m[4] + "," + m[2] + "," + m[5] + ")";
+}
+function updateScreen(m, global) {
+    if (global) {
+        transform = crossProduct3x3(m, transform);
+    } else {
+        transform = crossProduct3x3(transform, m);
+    }
+    document.getElementById("hello").style.transform =
+            formatMatrix(transform);
+    var s = transform.slice(0, 3).toString() + "\n" +
+            transform.slice(3, 6).toString() + "\n" +
+            transform.slice(6, 9).toString();
+    document.getElementById("matrix").value = s;
+}
+</script>
+</head>
+<body onload="updateScreen(transform, false);">
+<table>
+<tr>
+<td>Global Transforms: </td>
+<td><input type="button" value="&larr;"
+        onclick="updateScreen([1,0,-10,0,1,0,0,0,1], true);"></td>
+<td><input type="button" value="&rarr;"
+        onclick="updateScreen([1,0,10,0,1,0,0,0,1], true);"></td>
+<td><input type="button" value="&uarr;"
+        onclick="updateScreen([1,0,0,0,1,-10,0,0,1], true);"></td>
+<td><input type="button" value="&darr;"
+        onclick="updateScreen([1,0,0,0,1,10,0,0,1], true);"></td>        
+<td><input type="button" value="&#8634;"
+        onclick="updateScreen(
+                    [Math.cos(-Math.PI/9),-Math.sin(-Math.PI/9),0,
+                    Math.sin(-Math.PI/9),Math.cos(-Math.PI/9),0,
+                    0,0,1], true);"></td>
+<td><input type="button" value="&#8635;"
+        onclick="updateScreen(
+                    [Math.cos(Math.PI/9),-Math.sin(Math.PI/9),0,
+                    Math.sin(Math.PI/9),Math.cos(Math.PI/9),0,
+                    0,0,1], true);"></td>
+<td><input type="button" value="&frac23;&times;"
+        onclick="updateScreen([2/3,0,0,0,2/3,0,0,0,1], true);"></td>
+<td><input type="button" value="1.5&times;"
+        onclick="updateScreen([3/2,0,0,0,3/2,0,0,0,1], true);"></td>
+<td><input type="button" value="Reset"
+        onclick="transform = [1,0,0,0,1,0,0,0,1];
+                    updateScreen(transform, false);"></td>
+</tr>
+<tr>
+<td>Local Transforms: </td>
+<td><input type="button" value="&larr;"
+        onclick="updateScreen([1,0,-10,0,1,0,0,0,1], false);"></td>
+<td><input type="button" value="&rarr;"
+        onclick="updateScreen([1,0,10,0,1,0,0,0,1], false);"></td>
+<td><input type="button" value="&uarr;"
+        onclick="updateScreen([1,0,0,0,1,-10,0,0,1], false);"></td>
+<td><input type="button" value="&darr;"
+        onclick="updateScreen([1,0,0,0,1,10,0,0,1], false);"></td>        
+<td><input type="button" value="&#8634;"
+        onclick="updateScreen(
+                    [Math.cos(-Math.PI/9),-Math.sin(-Math.PI/9),0,
+                    Math.sin(-Math.PI/9),Math.cos(-Math.PI/9),0,
+                    0,0,1], false);"></td>
+<td><input type="button" value="&#8635;"
+        onclick="updateScreen(
+                    [Math.cos(Math.PI/9),-Math.sin(Math.PI/9),0,
+                    Math.sin(Math.PI/9),Math.cos(Math.PI/9),0,
+                    0,0,1], false);"></td>
+<td><input type="button" value="&frac23;&times;"
+        onclick="updateScreen([2/3,0,0,0,2/3,0,0,0,1], false);"></td>
+<td><input type="button" value="1.5&times;"
+        onclick="updateScreen([3/2,0,0,0,3/2,0,0,0,1], false);"></td>
+<td></td>
+</tr>
+</table>
+<textarea id="matrix" rows="3" cols="80"></textarea>
+<div id="hello" style="width: 100px; text-align: center;">
+Namaste Duniya !
+</div>
+</body>
+</html>

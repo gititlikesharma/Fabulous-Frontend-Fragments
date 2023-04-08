@@ -1,0 +1,100 @@
+<html lang=en>
+<head>
+    <title>Memory Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="cyan">
+    <script>
+        "use strict";
+        const game = build();
+        let last = [0, 0];
+        function build() {
+            const str = ["🍇","💐","🐌","👽","💗","🤙","🦷","🧠","👩‍⚕️","🎅","🍟","🏊‍♂️",
+                        "🗻","🕗","🍦","🦑","🛴","👧","👰","🧛","🧞‍♀️","👨‍👩‍👧‍👧","🐱","🦄",
+                        "🦇","🦔","🐣","🐤","🐬","🐟","🐞","🐝","🦋","🐛","🕸","🦠",
+                        "🌸","🌶","🍄","🌎","🏖","⭐","🌌","☃","🎃","⚽","🎮","🧦",
+                        "💎","🚯","♾","🧜‍♀️","🐕"].
+                        sort((a,b) => Math.random() - .5).slice(0, 12);
+            const a = [...new Array(str.length * 2).keys()].sort((a,b) => Math.random() - .5);
+            return a.map(i => str[i % str.length]);
+        }
+        function play(position) {
+            if (last[0] && last[1]) {
+                if (game[last[0] - 1] !== game[last[1] - 1]) {
+                    document.getElementById(last[0]).innerText = "";
+                    document.getElementById(last[1]).innerText = "";
+                }
+                last[0] = 0;
+                last[1] = 0;
+            } else if (last[0] && document.getElementById(position).innerText === "") {
+                last[1] = position;
+                document.getElementById(position).innerText = game[position - 1];
+                if (game[last[0] - 1] === game[last[1] - 1]) {
+                    play(position);
+                }
+            } else if (document.getElementById(position).innerText === "") {
+                last[0] = position;
+                document.getElementById(position).innerText = game[position - 1];
+            }
+        }
+        function verify() {
+            const g = game.slice().sort();
+            console.assert(g.length == 12 * 2);
+            for (let i = 0 ; i < g.length / 2 ; i++) {
+                console.assert(g[2 * i] === g[2 * i + 1]);
+            }
+            console.assert(new Set(g).size == 12);
+        }
+        function solve() {
+            game.forEach((x,i) => document.getElementById(i + 1).innerText = x);
+        }
+        function reset() {
+            Array.from({length: 24}, (x,i) => i + 1).forEach(i => document.getElementById(i).innerText = "");
+            last[0] = last[1] = 0;
+        }
+    </script>
+    <style>
+        button {
+            width: 120px;
+            height: 90px;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body style="background-color:lightcyan" onload='verify();'>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
+    <td><button id=1 onclick='play(1);'></button></td>
+    <td><button id=2 onclick='play(2);'></button></td>
+    <td><button id=3 onclick='play(3);'></button></td>
+    <td><button id=4 onclick='play(4);'></button></td>
+    <td><button id=5 onclick='play(5);'></button></td>
+    <td><button id=6 onclick='play(6);'></button></td>
+</tr>
+<tr>
+    <td><button id=7 onclick='play(7);'></button></td>
+    <td><button id=8 onclick='play(8);'></button></td>
+    <td><button id=9 onclick='play(9);'></button></td>
+    <td><button id=10 onclick='play(10);'></button></td>
+    <td><button id=11 onclick='play(11);'></button></td>
+    <td><button id=12 onclick='play(12);'></button></td>
+</tr>
+<tr>
+    <td><button id=13 onclick='play(13);'></button></td>
+    <td><button id=14 onclick='play(14);'></button></td>
+    <td><button id=15 onclick='play(15);'></button></td>
+    <td><button id=16 onclick='play(16);'></button></td>
+    <td><button id=17 onclick='play(17);'></button></td>
+    <td><button id=18 onclick='play(18);'></button></td>
+</tr>
+<tr>
+    <td><button id=19 onclick='play(19);'></button></td>
+    <td><button id=20 onclick='play(20);'></button></td>
+    <td><button id=21 onclick='play(21);'></button></td>
+    <td><button id=22 onclick='play(22);'></button></td>
+    <td><button id=23 onclick='play(23);'></button></td>
+    <td><button id=24 onclick='play(24);'></button></td>
+</tr>
+</table>
+</body>
+</html>

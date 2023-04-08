@@ -1,0 +1,130 @@
+<html lang="en">
+    <head>
+        <title>BreakDOM</title>
+		<style type="text/css"> html{color:#000;background:#222222;}a{cursor:pointer;}html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;outline-style:none;outline-width:0pt;}legend{color:#000;}a:focus,object,h1,h2,h3,h4,h5,h6{-moz-outline-style: none; border:0px;}strong {font-weight: bold;}body {overflow: hidden;font-family: Georgia, Helvetica, Arial, sans-serif;color: #333333;font-size: 11px;}a, a:hover {transition: all .08s linear;-o-transition: all .08s linear;-moz-transition: all .08s linear;-webkit-transition: all .08s linear;padding: 1px;}p.noCanvas {color: #999999;font-size: 24px;text-align: center;margin-top: 150px;}#panel {position: absolute;margin: 5px;padding: 5px;z-index: 99;background-color: #FFFECF;border: 1px solid #e1e0af;}#panel a {color: #333333;background-color: #FFFECF;text-decoration: underline;}#panel a:hover {color: #FFFECF;background-color: #333333;}#panel a.versionLink {padding: 1px;text-decoration: underline;}#panel a.versionLink.selected {color: #888888;text-decoration: none;}#panel p {padding: 0px 5px 5px 5px;line-height: 1.6em;}#panel h2 {font-size: 20px;font-weight: bold;font-family: Helvetica, sans-serif;padding: 5px 5px 5px 5px;}#chromeBadge {position: absolute;bottom: 0;right: 0;padding: 4px;}#sharing {background-color: #FFFECF;position: absolute;top: 0;right: 0;margin: 5px;padding: 7px 0 4px 10px;z-index: 98;border: 1px solid #e1e0af;}#facebook_button {float: left;}#retweet_button {float: left;}#flattr_button {float: right;margin: 1px 10px 0 4px;}
+html{color:#000;background: #ddd;}
+a{cursor:pointer;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+q:before,q:after{content:'';}
+abbr,acronym {border:0;font-variant:normal;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;outline-style:none;outline-width:0pt;}
+legend{color:#000;}
+a:focus,object,h1,h2,h3,h4,h5,h6{-moz-outline-style: none; border:0px;}
+strong {font-weight: bold;}
+body, 
+html {
+	background: #ddd;
+	height: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#container,
+#shadow {
+	position: absolute;
+	display: inline-block;
+	background: #eee;
+	width: 545px;
+	height: 450px;
+	left: 50%;
+	top: 50%;
+	margin-left: -272px;
+	margin-top: -230px;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 2px;
+}
+#more-experiments {
+	position: absolute;
+	display: block;
+	width: 100%;
+	top: 50%;
+	margin-top: 240px;
+	text-align: center;
+}
+	#more-experiments a {
+		padding: 2px;
+		color: #7A859F;
+		text-decoration: none;
+		border-bottom: 1px dotted #9AA4BB;
+		-webkit-transition: none;
+		   -moz-transition: none;
+		     -o-transition: none;
+		        transition: none; 
+	}
+	#more-experiments a:hover {
+		color: #fff;
+		background: #4869cc;
+		border: 0;
+	}
+#shadow {
+	overflow: visible;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+       -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+	#shadow:before {
+	    content: "";
+	    position: absolute; 
+		border-radius: 100px / 10px;
+		width: 90%;
+		height: 90%;
+		left: 5%;
+		top: 10%;
+		-webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+	       -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+	            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+	}
+#paddle {
+	position: absolute;
+	width: 100%;
+	height: 20px;
+	bottom: 0;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+#paddler {
+	position: absolute;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	bottom: 0;
+}
+#player {
+	position: absolute;
+}
+	#player input {
+		margin: 4px;
+	}
+#enemies input {
+	margin: 3px;
+}
+#counter {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	font-size: 56px;
+	font-weight: bold;
+	text-shadow: 0px -1px #fff;
+	text-align: center;
+	opacity: 0;
+}
+</style>
+    </head>
+    <body>
+<div id="shadow"></div><div id="container"></div>
+<script>
+(function(){function q(){b.enemies.empty();b.player.empty();i=[];c=null;b.counter.text("");for(var a=0;a<w;a++)for(var d=0;d<x;d++){var f=$('<input type="'+(Math.random()>0.5?"radio":"checkbox")+'" checked>').appendTo(b.enemies);f.css({position:"absolute",left:j+d*(m+j),top:j+a*(n+j)});i.push(new y(f))}a=e;navigator.appVersion.match(/Mac/gi)?a+=28:navigator.appVersion.match(/Win/gi)&&(a+=40,b.paddle.css("left",-20));b.paddle.width(a);b.paddler.width(1/r*e);c=new z(b.player);c.move(e*0.2+Math.random()*
+e*0.6,l-50);$('<input type="radio" checked>').appendTo(b.player);window.addEventListener("mousemove",A,!1);window.addEventListener("keydown",B,!1);window.addEventListener("keyup",C,!1);u()}function A(a){g=Math.max(Math.min((a.clientX-b.container.offset().left)/e,1),0)}function B(a){switch(a.keyCode){case 37:k.leftDown=!0;a.preventDefault();break;case 39:k.rightDown=!0,a.preventDefault()}}function C(a){switch(a.keyCode){case 37:k.leftDown=!1;a.preventDefault();break;case 39:k.rightDown=!1,a.preventDefault()}}
+function s(){c.velocity.y=-5;c.velocity.x=Math.random()>0.5?-4:4}function u(){k.leftDown&&(g=Math.max(g-0.02,r/2));k.rightDown&&(g=Math.min(g+0.02,1-r/2));var a=c.position();if(a.x<0)c.velocity.x=Math.abs(c.velocity.x);else if(a.x+t>e)c.velocity.x=-Math.abs(c.velocity.x);if(a.y<0)c.velocity.y=Math.abs(c.velocity.y);else if(a.y>l-35)if(a.y<l){var d=Math.max(Math.min(g*e-o/2,e-o),0),f=d+o;if(a.x+t>=d&&a.x<=f)c.velocity.x=10*((a.x-d)/(f-d)-0.5),c.velocity.y=-Math.abs(c.velocity.y),c.step()}else{q();
+s();return}c.step();d=i.length;f=!1;for(var v=0;d--;){var p=i[d],h=p.position();p.falling?(p.step(),h.y>l&&i.splice(d,1)):a.x+t>h.x&&a.x<h.x+m&&a.y+D>h.y&&a.y<h.y+n?(f=!0,p.fall(),c.velocity.y=a.y<h.y+m*0.5?-Math.abs(c.velocity.y):Math.abs(c.velocity.y),c.velocity.x=a.x<h.x+n*0.5?-Math.abs(c.velocity.x):Math.abs(c.velocity.x)):v++}f&&(b.counter.stop(!0,!0).fadeTo(50,0.4).fadeTo(900,0.1),b.counter.text(v));i.length===0?(alert("Omg omg! You won! Totally deserve a prize, but I don't have one :'("),q(),
+s()):(b.paddle.scrollLeft(g*b.paddler.width()-o*2),setTimeout(u,16))}function y(a,b,c){this.element=a;this.velocity={x:b||0,y:c||0};this.rotation=0;this.cachedPosition={x:this.element.position().left,y:this.element.position().top};this.falling=!1;this.step=function(){var a=this.position().x+this.velocity.x,b=this.position().y+this.velocity.y;this.element.css({left:a,top:b});this.velocity.x*=0.98;this.velocity.y*=1.02;this.cachedPosition={x:a,y:b}};this.fall=function(){this.falling=!0;this.element.removeAttr("checked");
+this.velocity.x=-2+Math.random()*4;this.velocity.y=2+Math.random()*4};this.position=function(){return this.cachedPosition}}function z(a,b,c){this.element=a;this.velocity={x:b||0,y:c||0};this.step=function(){this.move(this.element.position().left+this.velocity.x,this.element.position().top+this.velocity.y)};this.move=function(a,b){this.element.css({left:a,top:b})};this.position=function(){return{x:this.element.position().left,y:this.element.position().top}}}var b={};b.container=$("#container");b.counter=
+$('<div id="counter" />').appendTo(b.container);b.paddle=$('<div id="paddle" />').appendTo(b.container);b.paddler=$('<div id="paddler" />').appendTo(b.paddle);b.enemies=$('<div id="enemies" />').appendTo(b.container);b.player=$('<div id="player" />').appendTo(b.container);var k={leftDown:!1,rightDown:!1},e=b.container.width(),l=b.container.height(),i=[],c=null,t=14,D=14,m=15,n=15,j=3,x=Math.floor(e/(m+j)),w=Math.floor(l/(n+j)*0.3),r=0.25,o=0.25*e,g=0;q();s()})();
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<html>
+<head>
+<title> Check All Unique </title>
+</head>
+<body>
+<div class="centerize bg11">
+  <div class="card">
+    <h1>Unique Characters</h1>
+    <input id="textIn" placeholder="Enter Word with Unique Letters !"/>
+    <div id="output"></div>
+    <div class="coolbg"></div>
+  </div>
+</div>
+</body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+:root{
+  --font1:"Krona One"
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.bg11{ 
+  background: repeating-radial-gradient(hsl(100 50% 50%), hsl(100 50% 50%) 2px, transparent 2px, transparent 100%),linear-gradient(-45deg, teal, purple);
+  background-size:32px 32px;/*set spread*/
+}
+.centerize{
+  display:grid;
+  place-items:center;
+  width:100%;
+  min-height:100vh;
+  padding:1rem;
+}
+.card {
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 240px;
+  padding: 1rem;
+  border: 2px solid skyblue;
+  border-radius: 4px;
+  z-index:500;
+  overflow:hidden;
+  transition:all 1s;
+}
+.card:before{  
+  position:absolute;
+  content:"";
+  inset:0;
+  z-index:-1;  
+  background:linear-gradient(-15deg,lightgreen,skyblue);
+}
+.card > .coolbg{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(45deg,skyblue,hsl(300 50% 50%));
+  transform:skew(20deg);
+}
+.card > h1 {
+  font-family:var(--font1);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.card > input {
+  border: 2px solid lightblue;
+  border-radius: 4px;
+  padding:0.5rem;
+  background: #333;
+  color:white;
+}
+.card > #output {
+  margin:0.5rem;
+  padding:0.5rem;
+}
+.letterblock{
+  position:relative;
+  display:inline-block;
+  border-radius:4px;
+  background:lightblue;
+  padding:0.3rem;
+  margin:0.25rem;
+  transition:all 1s;
+  font-weight:bold;
+  left:9999px;
+  border:2px solid black;
+}
+.row .letterblock:nth-of-type(2n){
+  transform:rotate(15deg);  
+}
+.row:nth-child(2n) .letterblock:nth-of-type(2n){
+  transform:rotate(-15deg);  
+}
+.row .letterblock{    
+  transform:rotate(-5deg);  
+}
+.row:nth-child(2n) .letterblock{
+  transform:rotate(5deg);
+}
+.letterblock.slidein{
+  left:0px;
+}
+.result{
+  display:inline-block;
+  opacity:0;
+  transform:scale(200%) rotate(15deg);
+  animation: stamp 0.75s ease-in forwards; 
+  margin:0.5rem;
+  padding:0.5rem;
+  border:2px solid #333;
+  border-radius:4px;
+  background:white;
+  box-shadow:2px 2px 2px 4px hsla(0 0% 0% / 0.75);
+}
+@keyframes stamp{
+  75%{
+    opacity:1;
+    transform:scale(90%) rotate(-15deg);
+    box-shadow:1px 1px 1px 1px hsla(0 0% 0% / 0.75);
+  }
+  100%{
+    opacity:1;
+    transform:scale(100%) rotate(-15deg);   
+    box-shadow:0px 0px 0px 0px hsla(0 0% 0% / 0.75); 
+  }
+}
+.green{
+  background:green;
+  color:white;
+  border-color:white;
+}
+.red{
+  background:red;
+  color:black;
+  border-color:black;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", main);
+function validateAllUnique(str, returnTuple) {
+  let hash = {};
+  let result = true;
+  str = str.split("");
+  str.forEach((val, ind, arr) => {
+    if (!hash[val]) {
+      hash[val] = 0;
+    }
+    hash[val] += 1;
+    if (hash[val] > 1) result = false;
+  });
+  if (returnTuple) return [result, hash];
+  return result;
+}
+function generateOutput(outputEl, e) {
+  /*
+   * Instead of true/false, lets do green/red, and generate the letters each time to an output
+   * where CSS will animate the letters sliding in from the right to their slot
+   */  
+  let inputText = e.target.value;
+  if(inputText==="") {outputEl.innerHTML = ""; return;}
+  let uniqueResult, uniqueHash;
+  [uniqueResult, uniqueHash] = validateAllUnique(inputText, true);
+  outputEl.innerHTML = ""; //clear output
+  let frag = document.createDocumentFragment();  
+  let timeoutCounter=1000;
+  for (const [key, value] of Object.entries(uniqueHash)) {
+    let tempRow = document.createElement("div");
+    tempRow.classList.add("row");
+    for (x = 0; x < value; x += 1) {
+      let tempEl = document.createElement("span");
+      tempEl.classList.add("letterblock");
+      if (uniqueResult) {
+        tempEl.classList.add("green");
+      } else {
+        tempEl.classList.add("red");
+      }
+      setTimeout(()=>{tempEl.classList.add("slidein");},timeoutCounter);
+      timeoutCounter+=100;
+      tempEl.innerText=key;
+      tempRow.appendChild(tempEl);
+    }
+    frag.appendChild(tempRow);
+  }
+  let resultElement=document.createElement("span");
+  resultElement.classList.add("result");
+  if (uniqueResult) {
+    resultElement.classList.add("green");
+  } else {
+    resultElement.classList.add("red");
+  }
+  resultElement.innerText=uniqueResult;
+  frag.appendChild(resultElement);  
+  outputEl.appendChild(frag);
+}
+function main() {
+  let outputEl = document.querySelector("#output");
+  let textInEl = document.querySelector("#textIn");
+  textInEl.addEventListener("keyup", generateOutput.bind(this, outputEl));
+}
+</script>
+</html>

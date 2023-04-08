@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>One-Rep Max Estimate</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="cyan">
+<style>
+p     { display: table-row;  }
+label { display: table-cell; }
+input { display: table-cell; }
+body { background-color: lightcyan; }
+</style>
+<script>
+function Epley(w,r) {
+	return w * (1 + r/30);
+}
+function Brzycki(w,r) {
+	return w * 36 / (37 - r);
+}
+function McGlothin(w,r) {
+	return 100 * w / (101.3 - 2.67123 * r);
+}
+function Lombardi(w,r) {
+	return w * Math.pow(r, 0.10); 
+}
+function Mayhew(w,r) {
+	return 100 * w / (52.2 + 41.9 * Math.exp(-0.055 * r));
+}
+function OConner(w,r) {
+	return w * (1 + r / 40);
+}
+function Wathan(w,r) {
+	return 100 * w / (48.8 + 53.8 * Math.exp(-0.075 * r));
+}
+function Wendler(w,r) {
+	return w * r * 0.0333 + w;
+}
+var maxFunctions = [ Epley, Brzycki, McGlothin, Lombardi, Mayhew, OConner, Wathan, Wendler ];
+function calc() {
+	var w = parseInt(document.getElementById("w").value);
+	var r = parseInt(document.getElementById("r").value);	
+	var result = maxFunctions.map(f => (f.name + ":").padEnd(12) + Math.round(f(w,r)));
+	document.getElementById("result").value = "";
+	result.forEach(e => document.getElementById("result").value += e + "\n");
+}
+</script>
+</head>
+<body>
+<div>
+<p>
+<label for="w">Weight: </label>
+<input type="number" id="w" min="1" max="9999" oninput="calc();" autofocus="autofocus" />
+</p>
+<p>
+<label for="r">Repetitions: </label>
+<input type="number" id="r" min="1" max="9999" oninput="calc();" />
+</p>
+<textarea id="result" rows=10 cols=20></textarea>
+</div>
+</body>
+</html>

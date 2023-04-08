@@ -1,0 +1,119 @@
+<html lang=en>
+<head>
+ <title>Rock, Paper, Scissors</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="cyan">
+  <script>
+    "use strict";
+    // The machine model is a 3x3 matrix.
+    // Each row represents the previous play by the machine, and
+    // the row representst the subsequent play by the player.
+    var machine_model = Array(3).fill(null).map(() => Array(3).fill(0));
+    // Same idea for the player model, a 3x3 matrix that maps
+    // previous move to subsequent move.
+    var player_model = Array(3).fill(null).map(() => Array(3).fill(0));
+    var machine_moves = [];
+    var player_moves = [];
+    var player_wins = [];
+    var machine_wins = [];
+    var labels = ["💎", "📰", "✂️"];
+    var ROCK = 0;
+    var PAPER = 1;
+    var SCISSORS = 2;
+    function findmaxpos(A) {
+        let i = 0;
+        let m = 0;
+        while (i < A.length) {
+            if (A[i] > A[m]) {
+                m = i;
+            }
+            i++;
+        }
+        return m;
+    }
+    function sum(A) {
+        return A.reduce((a,v) => a + v, 0);
+    }
+    function play(player_move) {
+        let machine_move = -1;
+        console.log("Table of player previous move (row) and subsequent player move (column)");
+        console.table(player_model);
+        console.log("Table of machine previous move (row) and subsequent player move (column)");
+        console.table(machine_model);
+        if (machine_moves.length > 0 && player_moves.length > 0) {
+            // get the last player move
+            let last_player_move = player_moves[player_moves.length - 1];
+            // estimate the probability of their next move based on player moves
+            let next_move1 = findmaxpos(player_model[last_player_move]);
+            let p1 = player_model[last_player_move][next_move1] / sum(player_model[last_player_move]);
+            // same calculation based on machine moves
+            let last_machine_move = machine_moves[machine_moves.length - 1];
+            let next_move2 = findmaxpos(machine_model[last_machine_move]);
+            let p2 = machine_model[last_machine_move][next_move2] / sum(machine_model[last_machine_move]);
+            if (p1 > p2) {
+                console.debug(`Most likely player move is ${labels[next_move1].toLowerCase()} based on p1=${p1} (p2=${p2}). We think the player's move depends more on their previous move.`);
+                machine_move = (next_move1 + 1) % 3;
+            } else {
+                console.debug(`Most likely player move is ${labels[next_move2].toLowerCase()} based on p2=${p2} (p1=${p1}). We think the player's move depends more on the machine's move.`);
+                machine_move = (next_move2 + 1) % 3;
+            }
+            // update models (having already used them) with the current turn.
+            player_model[last_player_move][player_move]++;
+            machine_model[last_machine_move][player_move]++;
+        } else {
+            machine_move = Math.floor(Math.random() * 3);
+        }
+        player_moves.push(player_move);
+        machine_moves.push(machine_move);
+        if (player_move == machine_move) {
+            console.log("Tie");
+        } else if (player_move == ((machine_move + 1) % 3)) {
+            console.log("Player wins");
+            player_wins.push(1);
+        } else {
+            console.log("Machine wins");
+            machine_wins.push(1);
+        }
+        let wins = player_wins.length == 0 ? 0 : sum(player_wins);
+        let losses = machine_wins.length == 0 ? 0 : sum(machine_wins);
+        console.log(`Player win rate is ${wins / (wins + losses)}`);
+        document.getElementById('machine').innerText = labels[machine_move];
+        document.getElementById('player_score').value = wins;
+        document.getElementById('machine_score').value = losses;
+    }
+  </script>
+  <style>
+    label {
+      width: 120px;
+      display: inline-block;
+    }
+    button {
+        width: 120px;
+        height: 90px;
+        font-size: 60px;
+    }
+  </style>
+</head>
+<body style="background-color:lightcyan">
+    <h1>Player</h1>
+    <div>
+    <button id=rock onclick='play(ROCK);'>💎</button>
+    <button id=paper onclick='play(PAPER);'>📰</button>
+    <button id=scissors onclick='play(SCISSORS);'>✂️</button>
+    </div>
+    <h1>Machine</h1>
+    <div>
+    <button id=machine disabled></button>
+    </div>
+    <h1>Scores</h1>
+    <div>
+        <label for=player_score>Player Wins:</label>
+        <input type="number" id='player_score' disabled value=0 />
+    </div>
+    <div>
+        <label for=machine_score>Machine Wins:</label>
+        <input type="number" id='machine_score' disabled value=0 />
+    </div>
+</body>
+</html>

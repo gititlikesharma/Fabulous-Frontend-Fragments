@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>JSON Mapper</title>
+</head>
+<body>
+ <div id="app">
+  <div id="wrap">
+    <div id="form" class="card">      
+      <div class="form-group">
+        <h1>Edit JSON Data Blobs</h1>
+        <p>To use this editor, please follow the steps below:</p>
+        <p>Click the "Run Code" button to see how the demo works (using the prefilled demo data) before trying it yourself.</p>
+        <label>Use Steps:</label>
+        <ol>
+          <li>Paste your JSON object / array-object into textbox #1</li>
+          <li>Write JavaScript to edit the JSON in textbox #2</li>
+          <li>Click the "Run Code" button to execute the JavaScript, modify the JSON data, and append it to the output below in textbox #3.</li>
+        </ol>
+        <hr/>
+      </div>      
+      <div class="form-group">
+        <label>(#1) JSON Data</label>
+        <textarea id="json-data" placeholder="Paste Your JSON Code Here">
+[
+   {"fruit": "banana", "weight": "4oz"},
+   {"fruit": "watermelon", "weight": "7 lbs"},
+   {"fruit": "apple", "weight": "3oz"}
+]
+        </textarea>
+        <hr/>
+      </div>      
+      <div class="form-group">
+        <label>(#2) JavaScript to Modify the JSON</label>
+        <textarea id="javascript-code" placeholder="Write Your JavaScript Code Here like so: function yourFunction(json) {... return someResult;}">return json.map(x => {return {message: `The ${x.fruit} weighs ${x.weight}.`};});</textarea>
+      </div>      
+      <div class="form-group">
+        <button id="run-code">Run Code</button>
+      </div>      
+      <div class="form-group">
+        <div id="error-catcher"></div>
+      </div>      
+    </div>
+    <div id="result" class="card">
+      <label>(#3) Results</label>
+      <textarea id="output" placeholder="Your Results Will Append Here"></textarea>
+    </div>
+  </div>
+</div>
+</body>
+<style>
+* {font-family:sans-serif;}
+body {background:#eee;}
+#wrap {width:800px; max-width;100%; margin:1rem auto; display:block; padding:0.5rem;}
+.card {padding:1rem; display:block; border:solid 1px #ddd; box-shadow: 0 0 6px #ddd; margin-bottom:2rem; background:white; transition:all 0.2s linear;}
+.card:hover {box-shadow:0 0 24px #9c9c9c;}
+li {margin-bottom:0.5rem;}
+textarea {width:100%; min-height:200px; margin-bottom:1rem; background:#333; color:#04e304;}
+button {cursor:pointer;}
+button:not(.delete) {width:300px; max-width:100%; display:block; border:0px; padding:1rem; margin:1rem auto; background:blue; font-size:1.5rem; font-weight:700; color:white; box-shadow: 0 0 12px #ddd; transition:all 0.2s linear;}
+button:not(.delete):hover {background:green; box-shadow: 0 0 24px #9c9c9c;}
+label {font-weight:800; margin:1rem 0; display:block;}
+.card {position:relative;}
+.card.error {border-left:solid 8px red;}
+.delete {position:absolute; top:12px; right:12px; border:none; background:red; color: white;}
+</style>
+<script>
+ const carefulEval = (fn, json) => {
+  const runFN = `(function (json) {${fn}})`;
+  const exec = (fn,json) => {return window.eval.call(window,runFN)(json)};
+  console.log("carefulEval", {json,exec,runFN});
+  return exec(fn,json);
+}
+function sanitizer(str) {
+  return str.replace( /[\r\n\\]+/gm, "" ).replace(/\\/g, "").replace("  ", "");
+}
+function deleteMe(event) {event.target.parentNode.parentNode.removeChild(event.target.parentNode);}
+function runTheCode(e) {
+  try {
+    e.preventDefault();
+    let json =  JSON.parse(document.getElementById('json-data').value);
+    let js_code = sanitizer(document.getElementById('javascript-code').value);
+    let outputCatcher = document.getElementById('output');
+    console.log("runTheCode", {json,js_code,outputCatcher});
+    let modifiedData = carefulEval(js_code, json);
+    console.log({modifiedData});
+    outputCatcher.value = "";
+    outputCatcher.value = JSON.stringify(modifiedData, undefined, 4);
+  } catch(err) {
+    console.log({err});
+    document.getElementById('error-catcher')
+       .insertAdjacentHTML(
+          'beforeend', 
+          `<div class="card error">${err}<button class="delete" onclick="deleteMe(event)">X</button></div>`
+      );
+  }
+}
+document.getElementById('run-code').addEventListener('click', (e) => {
+  runTheCode(e);
+});
+</script>
+</html>

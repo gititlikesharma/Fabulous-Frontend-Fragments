@@ -1,0 +1,2873 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Simple Opt Out</title>
+<style>
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+  -webkit-text-size-adjust: none;
+}
+.hljs-comment,
+.diff .hljs-header,
+.hljs-javadoc {
+  color: #998;
+  font-style: italic;
+}
+.hljs-keyword,
+.css .rule .hljs-keyword,
+.hljs-winutils,
+.nginx .hljs-title,
+.hljs-subst,
+.hljs-request,
+.hljs-status {
+  color: #333;
+  font-weight: bold;
+}
+.hljs-number,
+.hljs-hexcolor,
+.ruby .hljs-constant {
+  color: #008080;
+}
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.tex .hljs-formula {
+  color: #d14;
+}
+.hljs-title,
+.hljs-id,
+.scss .hljs-preprocessor {
+  color: #900;
+  font-weight: bold;
+}
+.hljs-list .hljs-keyword,
+.hljs-subst {
+  font-weight: normal;
+}
+.hljs-class .hljs-title,
+.hljs-type,
+.vhdl .hljs-literal,
+.tex .hljs-command {
+  color: #458;
+  font-weight: bold;
+}
+.hljs-tag,
+.hljs-tag .hljs-title,
+.hljs-rules .hljs-property,
+.django .hljs-tag .hljs-keyword {
+  color: #000080;
+  font-weight: normal;
+}
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body {
+  color: #008080;
+}
+.hljs-regexp {
+  color: #009926;
+}
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.lisp .hljs-keyword,
+.clojure .hljs-keyword,
+.scheme .hljs-keyword,
+.tex .hljs-special,
+.hljs-prompt {
+  color: #990073;
+}
+.hljs-built_in {
+  color: #0086b3;
+}
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-pi,
+.hljs-doctype,
+.hljs-shebang,
+.hljs-cdata {
+  color: #999;
+  font-weight: bold;
+}
+.hljs-deletion {
+  background: #fdd;
+}
+.hljs-addition {
+  background: #dfd;
+}
+.diff .hljs-change {
+  background: #0086b3;
+}
+.hljs-chunk {
+  color: #aaa;
+}
+</style>
+<style>
+.markdown-body {
+  padding-left: 30px;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+}
+.markdown-body h1:hover .header-link:before,
+.markdown-body h2:hover .header-link:before,
+.markdown-body h3:hover .header-link:before,
+.markdown-body h4:hover .header-link:before,
+.markdown-body h5:hover .header-link:before,
+.markdown-body h6:hover .header-link:before {
+    content: "\00B6";/* pilcrow */
+    color: #888;
+    font-size: smaller;
+}
+.markdown-body .header-link {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: -0.7em;
+  display: block;
+  padding-right: 1em;
+}
+.markdown-body h1:hover .header-link,
+.markdown-body h2:hover .header-link,
+.markdown-body h3:hover .header-link,
+.markdown-body h4:hover .header-link,
+.markdown-body h5:hover .header-link,
+.markdown-body h6:hover .header-link {
+  display: inline-block;
+  text-decoration: none;
+}
+</style>
+<style>
+@font-face {
+  font-family: octicons-anchor;
+}
+body {
+  background-color: white;
+  max-width: 790px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+.markdown-body a {
+  background: transparent;
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+.markdown-body strong {
+  font-weight: bold;
+}
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.markdown-body img {
+  border: 0;
+}
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+.markdown-body pre {
+  overflow: auto;
+}
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+.markdown-body input {
+  line-height: normal;
+}
+.markdown-body input[type="checkbox"] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.markdown-body input {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+.markdown-body h1 {
+  font-size: 30px;
+}
+.markdown-body h2 {
+  font-size: 21px;
+}
+.markdown-body h3 {
+  font-size: 16px;
+}
+.markdown-body h4 {
+  font-size: 14px;
+}
+.markdown-body h5 {
+  font-size: 12px;
+}
+.markdown-body h6 {
+  font-size: 11px;
+}
+.markdown-body blockquote {
+  margin: 0;
+}
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+.markdown-body dd {
+  margin-left: 0;
+}
+.markdown-body code {
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+.markdown-body .anchor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+.markdown-body .anchor:focus {
+  outline: none;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  height: 1em;
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  display: inline-block;
+}
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+.markdown-body h5 {
+  font-size: 1em;
+}
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-body li>p {
+  margin-top: 16px;
+}
+.markdown-body dl {
+  padding: 0;
+}
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+.markdown-body table th {
+  font-weight: bold;
+}
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.markdown-body pre {
+  word-wrap: normal;
+}
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+.markdown-body .highlight {
+  background: #fff;
+}
+.markdown-body .highlight .mf,
+.markdown-body .highlight .mh,
+.markdown-body .highlight .mi,
+.markdown-body .highlight .mo,
+.markdown-body .highlight .il,
+.markdown-body .highlight .m {
+  color: #945277;
+}
+.markdown-body .highlight .s,
+.markdown-body .highlight .sb,
+.markdown-body .highlight .sc,
+.markdown-body .highlight .sd,
+.markdown-body .highlight .s2,
+.markdown-body .highlight .se,
+.markdown-body .highlight .sh,
+.markdown-body .highlight .si,
+.markdown-body .highlight .sx,
+.markdown-body .highlight .s1 {
+  color: #df5000;
+}
+.markdown-body .highlight .kc,
+.markdown-body .highlight .kd,
+.markdown-body .highlight .kn,
+.markdown-body .highlight .kp,
+.markdown-body .highlight .kr,
+.markdown-body .highlight .kt,
+.markdown-body .highlight .k,
+.markdown-body .highlight .o {
+  font-weight: bold;
+}
+.markdown-body .highlight .kt {
+  color: #458;
+}
+.markdown-body .highlight .c,
+.markdown-body .highlight .cm,
+.markdown-body .highlight .c1 {
+  color: #998;
+  font-style: italic;
+}
+.markdown-body .highlight .cp,
+.markdown-body .highlight .cs {
+  color: #999;
+  font-weight: bold;
+}
+.markdown-body .highlight .cs {
+  font-style: italic;
+}
+.markdown-body .highlight .n {
+  color: #333;
+}
+.markdown-body .highlight .na,
+.markdown-body .highlight .nv,
+.markdown-body .highlight .vc,
+.markdown-body .highlight .vg,
+.markdown-body .highlight .vi {
+  color: #008080;
+}
+.markdown-body .highlight .nb {
+  color: #0086B3;
+}
+.markdown-body .highlight .nc {
+  color: #458;
+  font-weight: bold;
+}
+.markdown-body .highlight .no {
+  color: #094e99;
+}
+.markdown-body .highlight .ni {
+  color: #800080;
+}
+.markdown-body .highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.markdown-body .highlight .nf {
+  color: #945277;
+  font-weight: bold;
+}
+.markdown-body .highlight .nn {
+  color: #555;
+}
+.markdown-body .highlight .nt {
+  color: #000080;
+}
+.markdown-body .highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.markdown-body .highlight .gd {
+  color: #000;
+  background-color: #fdd;
+}
+.markdown-body .highlight .gd .x {
+  color: #000;
+  background-color: #faa;
+}
+.markdown-body .highlight .ge {
+  font-style: italic;
+}
+.markdown-body .highlight .gr {
+  color: #aa0000;
+}
+.markdown-body .highlight .gh {
+  color: #999;
+}
+.markdown-body .highlight .gi {
+  color: #000;
+  background-color: #dfd;
+}
+.markdown-body .highlight .gi .x {
+  color: #000;
+  background-color: #afa;
+}
+.markdown-body .highlight .go {
+  color: #888;
+}
+.markdown-body .highlight .gp {
+  color: #555;
+}
+.markdown-body .highlight .gs {
+  font-weight: bold;
+}
+.markdown-body .highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+.markdown-body .highlight .gt {
+  color: #aa0000;
+}
+.markdown-body .highlight .ow {
+  font-weight: bold;
+}
+.markdown-body .highlight .w {
+  color: #bbb;
+}
+.markdown-body .highlight .sr {
+  color: #017936;
+}
+.markdown-body .highlight .ss {
+  color: #8b467f;
+}
+.markdown-body .highlight .bp {
+  color: #999;
+}
+.markdown-body .highlight .gc {
+  color: #999;
+  background-color: #EAF2F5;
+}
+.markdown-body .octicon {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+.markdown-body .task-list-item input {
+  float: left;
+  margin: 0.3em 0 0.25em -1.6em;
+  vertical-align: middle;
+}
+@media (min-width: 43.75em) {
+  body {
+    padding: 30px;
+  }
+}
+</style>
+  </head>
+  <body>
+    <article class="markdown-body"><style>
+  body {
+    max-width: 1500px;
+  }
+  sup {
+    color: #ceae31;
+    margin-left: 2px;
+  }
+</style>
+<center>
+  <h2>Opt out of all the data sharing you wouldn't opt in to.</h2>
+</center>
+<br />
+<h2 id="welcome"><a class="header-link" href="#welcome"></a>Welcome</h2>
+<p><strong>Simple Opt Out</strong> is drawing attention to opt-out data sharing and marketing practices that many people aren&#39;t aware of (and most people don&#39;t want), then making it easier to opt out. For example:</p>
+<ul class="list">
+<li><strong><a href="#chase">Chase</a></strong> may share your &quot;account balances and transaction history … For nonaffiliates to market to you.&quot;</li>
+<li><strong><a href="#crate-&-barrel">Crate &amp; Barrel</a></strong> shares &quot;your customer information [name, postal address and email address, and transactions you conduct on our Website or offline] with other select companies.&quot;</li>
+<li><strong><a href="#intercontinental-hotels">InterContinental Hotels</a></strong> may share &quot;your information with third parties … to extend special offers about their own products and services&quot;</li>
+</ul>
+<p>This site makes it easier to opt out of data sharing by 50+ companies (or <a href="#changes">request a company</a> or see <a href="#suggestions">opt-out tips</a>). Enjoy!</p>
+<br />
+<h1 id="opt-out-of-data-sharing-by"><a class="header-link" href="#opt-out-of-data-sharing-by"></a>Opt-out of data sharing by…</h1>
+<p><a href="#1stdibs">1stdibs</a> •
+<a href="#23andme">23andMe</a> •
+<a href="#aaa">AAA</a> •
+<a href="#ace-hardware">Ace Hardware</a> •
+<a href="#adobe">Adobe</a> •
+<a href="#ally">Ally</a> •
+<a href="#amazoncom">Amazon.com</a> •
+<a href="#american-express">American Express</a> •
+<a href="#ancestrycom">Ancestry.com</a> •
+<a href="#apple">Apple</a> •
+<a href="#att">AT&amp;T</a> •
+<a href="#bank-of-america">Bank of America</a> •
+<a href="#beenverified">BeenVerified</a> •
+<a href="#biden-2020-campaign">Biden 2020 Campaign</a> •
+<a href="#blick-art">Blick Art</a> •
+<a href="#bose">Bose</a> •
+<a href="#capitalone-360">CapitalOne 360</a> •
+<a href="#carlton-farms">Carlton Farms</a> •
+<a href="#carnival-cruises">Carnival Cruises</a> •
+<a href="#cb2">CB2</a> •
+<a href="#centurylink">CenturyLink</a> •
+<a href="#chase">Chase</a> •
+<a href="#choice-hotels">Choice Hotels</a> •
+<a href="#chownow">ChowNow</a> •
+<a href="#comcast-xfinity">Comcast Xfinity</a> •
+<a href="#the-company-store">The Company Store</a> •
+<a href="#condé-nast">Condé Nast</a> •
+<a href="#costco">Costco</a> •
+<a href="#corelogic">CoreLogic</a> •
+<a href="#crate--barrel">Crate &amp; Barrel</a> •
+<a href="#disqus">Disqus</a> •
+<a href="#edison">Edison</a> •
+<a href="#facebook">Facebook</a> •
+<a href="#ford">Ford</a> •
+<a href="#frontier-communications">Frontier Communications</a> •
+<a href="#gardeners-supply">Gardener&#39;s Supply</a> •
+<a href="#google">Google</a> •
+<a href="#guitar-center">Guitar Center</a> •
+<a href="#hanes">Hanes</a> •
+<a href="#hbo">HBO</a> •
+<a href="#hearst">Hearst</a> •
+<a href="#home-depot">Home Depot</a> •
+<a href="#honda-motors">Honda Motors</a> •
+<a href="#hoover">Hoover</a> •
+<a href="#hulu">Hulu</a> •
+<a href="#hyundai-motors">Hyundai Motors</a> •
+<a href="#infotracer">InfoTracer</a> •
+<a href="#instant-checkmate">Instant Checkmate</a> •
+<a href="#intercontinental-hotels">InterContinental Hotels</a> •
+<a href="#kroger">Kroger</a> •
+<a href="#kustomer">Kustomer</a> •
+<a href="#lendingclub">LendingClub</a> •
+<a href="#lexis-nexis">Lexis-Nexis</a> •
+<a href="#lg">LG</a> •
+<a href="#linkedin">LinkedIn</a> •
+<a href="#little-league">Little League</a> •
+<a href="#liveramp">LiveRamp</a> •
+<a href="#marriott-hotels">Marriott Hotels</a> •
+<a href="#mastercard">Mastercard</a> •
+<a href="#meredithtime-inc">Meredith/Time Inc.</a> •
+<a href="#metlife">MetLife</a> •
+<a href="#microsoft">Microsoft</a> •
+<a href="#mindbodyonline">MindBodyOnline</a> •
+<a href="#national-geographic">National Geographic</a> •
+<a href="#nature-conservancy">Nature Conservancy</a> •
+<a href="#netflix">Netflix</a> •
+<a href="#nrs">NRS</a> •
+<a href="#nytimes">NYTimes</a> •
+<a href="#office-depot-officemax">Office Depot OfficeMax</a> •
+<a href="#omaha-steaks">Omaha Steaks</a> •
+<a href="#optoutprescreen.com">OptOutPrescreen.com</a> •
+<a href="#oracle-data-cloud">Oracle Data Cloud</a> •
+<a href="#paypal">PayPal</a> •
+<a href="#peekyou">PeekYou</a> •
+<a href="#people-search-now">People Search Now</a> •
+<a href="#pictureframescom">PictureFrames.com</a> •
+<a href="#pinterest">Pinterest</a> •
+<a href="#reddit">Reddit</a> •
+<a href="#retail-equation">Retail Equation</a> •
+<a href="#riskified">Riskified</a> •
+<a href="#rockler">Rockler</a> •
+<a href="#roku">Roku</a> •
+<a href="#roomba-%28irobot%29">Roomba (iRobot)</a> •
+<a href="#samsung">Samsung</a> •
+<a href="#saatchi-art">Saatchi Art</a> •
+<a href="#seattle-art-museum">Seattle Art Museum</a> •
+<a href="#seattle-times">Seattle Times</a> •
+<a href="#slashdot-media">Slashdot Media</a> •
+<a href="#southwest-airlines">Southwest Airlines</a> •
+<a href="#spokeo">Spokeo</a> •
+<a href="#sprint">Sprint</a> •
+<a href="#staples">Staples</a> •
+<a href="#taunton-press">Taunton Press</a> •
+<a href="#t-mobile">T-Mobile</a> •
+<a href="#transunion">TransUnion</a> •
+<a href="#truepeoplesearch">TruePeopleSearch</a> •
+<a href="#trump-2020-campaign">Trump 2020 Campaign</a> •
+<a href="#tuft--needle">Tuft &amp; Needle</a> •
+<a href="#twitter">Twitter</a> •
+<a href="#united-airlines">United Airlines</a> •
+<a href="#us-postal-service">US Postal Service</a> •
+<a href="#verizon">Verizon</a> •
+<a href="#visa">Visa</a> •
+<a href="#vizio">Vizio</a> •
+<a href="#vox">Vox</a> •
+<a href="#walmart">Walmart</a> •
+<a href="#wells-fargo">Wells Fargo</a> •
+<a href="#whitepagescom">Whitepages.com</a> •
+<a href="#whole-foods">Whole Foods</a> •
+<a href="#williams-sonoma">Wiliams-Sonoma</a> •
+<a href="#woodcraft">Woodcraft</a> •
+<a href="#yahoooath">Yahoo/Oath</a> •
+<a href="#yelp">Yelp</a> •
+<a href="#youtube">YouTube</a> •
+<a href="#zeta-global">Zeta Global</a></p>
+<br />
+<h3 id="1stdibs"><a class="header-link" href="#1stdibs"></a>1stdibs</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">User activity with sellers</td>
+<td align="left"><a href="https://www.1stdibs.com/my/account/profile/">Opt-out</a></td>
+<td align="left"><a href="https://www.1stdibs.com/about/privacy-policy/">Policy</a>: &quot;1stdibs may share your search terms, or items you have viewed, saved, or purchased with that seller&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="23andme"><a class="header-link" href="#23andme"></a>23andMe</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DNA sharing</td>
+<td align="left"><a href="https://you.23andme.com/user/edit/privacy/">Opt-out</a>, <a href="https://you.23andme.com/user/edit/preferences/">Research</a></td>
+<td align="left"><a href="https://www.23andme.com/about/privacy/#jump-link-content-your-choices">Policy: Your choices</a>. <a href="https://customercare.23andme.com/hc/en-us/articles/212170838-Privacy-and-display-settings-in-DNA-Relatives">Instructions</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="aaa"><a class="header-link" href="#aaa"></a>AAA</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells members&#39; info with third parties</td>
+<td align="left">Call 888-243-9815</td>
+<td align="left"><a href="https://wa.aaa.com/general/privacy-notice.html">Policy</a> (varies <a href="https://www.google.com/search?q=site%3Aaaa.com+%22privacy+policy%22">by state</a>)</td>
+</tr>
+</tbody></table>
+<h3 id="ace-hardware"><a class="header-link" href="#ace-hardware"></a>Ace Hardware</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; transactions with third parties</td>
+<td align="left"><a href="https://privacyportal-cdn.onetrust.com/dsarwebform/08fcfb30-e571-44e6-a1de-eb62fe3d7b00/7e4cbc3a-3f48-4d53-9626-84f43245ca3a.html">Opt-out</a></td>
+<td align="left"><a href="https://www.acehardware.com/customer-service#mz-cs-top">Policy</a>: &quot;We may make your personal information, together with information regarding your preferences, activity, purchases, and demographics, available to affiliates for purposes of conducting marketing activities on behalf of Ace, the affiliates, and/or or any other service providers.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="adobe"><a class="header-link" href="#adobe"></a>Adobe</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Ad targeting &amp; data collection</td>
+<td align="left"><a href="https://www.adobe.com/privacy/opt-out.html">Opt-out</a></td>
+<td align="left"><a href="https://www.adobe.com/privacy/policy.html#rights">Policy: Your rights</a></td>
+</tr>
+</tbody></table>
+<h3 id="ally"><a class="header-link" href="#ally"></a>Ally</h3>
+<p>Includes: <strong>GMAC Mortgage</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://www.ally.com/privacy/preferences">Opt out</a></td>
+<td align="left"><a href="https://www.ally.com/privacy/">Policy</a>: &quot;we may also share information collected about you with companies … to offer you financial products and services&quot;; &quot;We may share information about you with … nonaffiliates for analysis, market research and marketing purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="amazoncom"><a class="header-link" href="#amazoncom"></a>Amazon.com</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Browsing history</td>
+<td align="left"><a href="https://www.amazon.com/gp/history">Opt-out</a> (click &quot;Manage history&quot;)</td>
+<td align="left"><a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496#GUID-8966E75F-9B92-4A2B-BFD5-967D57513A40__SECTION_697E8F46A0354B3B83E1A0D4C2FA52EE">Policy: Choices</a></td>
+</tr>
+<tr>
+<td align="left">Ad personalization</td>
+<td align="left"><a href="https://www.amazon.com/adprefs/">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="american-express"><a class="header-link" href="#american-express"></a>American Express</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells cardholder info with third parties</td>
+<td align="left"><a href="http://www.americanexpress.com/communications">Opt-out</a></td>
+<td align="left"><a href="https://www.americanexpress.com/us/company/privacy-center/online-privacy-disclosures/#privacy-statement">Policy</a>: &quot;We may share Personal Information … with financial institutions or Co-brand Partners with whom we jointly offer or develop products and services&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="ancestrycom"><a class="header-link" href="#ancestrycom"></a>Ancestry.com</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Family tree</td>
+<td align="left"><a href="https://support.ancestry.com/s/article/Family-Tree-Privacy">Instructions</a></td>
+<td align="left"><a href="https://www.ancestry.com/cs/privacyphilosophy">Privacy Philosophy</a></td>
+</tr>
+<tr>
+<td align="left">DNA Match</td>
+<td align="left"><a href="https://support.ancestry.com/s/article/Choosing-not-to-be-Listed-as-an-AncestryDNA-Match">Instructions</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Research</td>
+<td align="left"><a href="https://support.ancestry.com/s/article/AncestryDNA-Research-Project">Instructions</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="apple"><a class="header-link" href="#apple"></a>Apple</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Interest- and location-based ads (iOS, macOS, TV)</td>
+<td align="left"><a href="https://support.apple.com/en-us/HT202074">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">iOS prompt for app tracking</td>
+<td align="left">Settings → Privacy → Tracking → disable &quot;Allow Apps to Request to Track&quot;</td>
+<td align="left"><a href="https://developer.apple.com/app-store/user-privacy-and-data-use/">More information</a>. Disabling the option is equivalent to answering &quot;No&quot; without being prompted.</td>
+</tr>
+</tbody></table>
+<h3 id="att"><a class="header-link" href="#att"></a>AT&amp;T</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Phone data (&quot;CPNI&quot;) sharing</td>
+<td align="left"><a href="https://att.com/cpni/optout">Opt-out</a></td>
+<td align="left"><a href="https://about.att.com/sites/privacy_policy/rights_choices">Policy: Your Choices</a></td>
+</tr>
+<tr>
+<td align="left">Mobile calls, data, and ad targeting</td>
+<td align="left"><a href="http://www.att.com/cmpchoice">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">DirecTV</td>
+<td align="left"><a href="https://www.directv.com/DTVAPP/content/support/DTVAPP_policy">Opt-out</a> and in set-top box settings</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="bank-of-america"><a class="header-link" href="#bank-of-america"></a>Bank of America</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; transactions with third parties</td>
+<td align="left"><a href="https://secure.bankofamerica.com/customer/public/privacy.go">Opt-out</a> (or call 888-341-5000)</td>
+<td align="left"><a href="https://www.bankofamerica.com/privacy/consumer-privacy-notice.go">How your data is shared</a></td>
+</tr>
+</tbody></table>
+<h3 id="beenverified"><a class="header-link" href="#beenverified"></a>BeenVerified</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.beenverified.com/app/optout/search">Opt-out</a></td>
+<td align="left"><a href="https://www.beenverified.com/faq/privacy/">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="biden-2020-campaign"><a class="header-link" href="#biden-2020-campaign"></a>Biden 2020 Campaign</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells donor info with third parties</td>
+<td align="left">Email <a href="mailto:privacy@joebiden.com?subject=California%20Privacy%20Rights%20Request">privacy@joebiden.com</a></td>
+<td align="left"><a href="https://joebiden.com/privacy-policy/">Policy</a>: &quot;We may share information about you … With candidates, organizations, campaigns, groups or causes that we believe have similar political viewpoints, principles or objectives or share similar goals&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="blick-art"><a class="header-link" href="#blick-art"></a>Blick Art</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://www.dickblick.com/california-privacy-rights/#Opt-Out">Opt-out</a> or email <a href="mailto:privacy@dickblick.com">privacy@dickblick.com</a></td>
+<td align="left"><a href="https://www.dickblick.com/privacy/">Policy</a>: &quot;we may rent, exchange, or otherwise share names and mailing addresses with companies offering products or services that we think may be of interest to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="bose"><a class="header-link" href="#bose"></a>Bose</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Collects unnecessary personal usage data</td>
+<td align="left">In Bose Connect Application, &quot;Privacy Policy &amp; Settings&quot; screen</td>
+<td align="left"><a href="https://www.bose.com/en_us/legal/privacy_policy.html">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="bizjournalscom"><a class="header-link" href="#bizjournalscom"></a>BizJournals.com</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells subscriber info with third parties</td>
+<td align="left">Email <a href="mailto:PrivacyPolicyCoordinator@bizjournals.com">PrivacyPolicyCoordinator@bizjournals.com</a></td>
+<td align="left"><a href="https://www.bizjournals.com/privacy#IVC">Policy</a>: &quot;we rent, sell, share, and transfer Personal Information to [a giant list that is effectively anyone who will buy it]&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="capitalone-360"><a class="header-link" href="#capitalone-360"></a>CapitalOne 360</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; transactions with third parties</td>
+<td align="left">Call 888-817-2970</td>
+<td align="left"><a href="https://www.capitalone.com/bank/privacy/">How your data is shared</a></td>
+</tr>
+</tbody></table>
+<h3 id="carlton-farms"><a class="header-link" href="#carlton-farms"></a>Carlton Farms</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:info@carltonfarms.com">info@carltonfarms.com</a></td>
+<td align="left"><a href="https://www.carltonfarms.com/privacy-policy/">Policy</a>: &quot;we may share personally identifiable information with unaffiliated third parties … [which] provide goods or services that we believe may be of interest to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="carnival-cruises"><a class="header-link" href="#carnival-cruises"></a>Carnival Cruises</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:dpo@carnival.com">dpo@carnival.com</a> (or call 1-888-CARNIVAL), or <a href="https://www.carnival.com/request-forms/california-consumer-privacy-act-request-form.aspx">delete personal data</a></td>
+<td align="left"><a href="https://www.carnival.com/about-carnival/legal-notice/privacy-notice.aspx#third-party-disclosure">Policy</a>: &quot;We may share information … With select third parties, so that they can provide you with information and marketing messages&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="cb2"><a class="header-link" href="#cb2"></a>CB2</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left"><a href="https://www.cb2.com/customer-service/sellingandsharing-request">Opt-out</a></td>
+<td align="left"><a href="https://www.cb2.com/customer-service/privacy-policy">Policy</a>: &quot;We share your customer information with other select companies whose products and services you may find useful. This information includes your name, postal address and email address, as well as a record of any transactions you conduct on our Website or offline&quot;</td>
+</tr>
+<tr>
+<td align="left">Postal ads</td>
+<td align="left"><a href="https://www.cb2.com/customer-service/opt-out">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#crate--barrel">Crate &amp; Barrel</a>.</p>
+<h3 id="centurylink"><a class="header-link" href="#centurylink"></a>CenturyLink</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Data sharing and marketing</td>
+<td align="left"><a href="http://www.centurylink.com/help/privacy/optout_en.html">Opt-out</a></td>
+<td align="left"><a href="http://www.centurylink.com/aboutus/legal/privacy-policy/privacy-policy-complete.html#choices">Policy: Choices</a></td>
+</tr>
+</tbody></table>
+<h3 id="chase"><a class="header-link" href="#chase"></a>Chase</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; transactions with third parties</td>
+<td align="left"><a href="https://www.chase.com/privacypreferences">Opt-out</a> or call 1–888–868–8618</td>
+<td align="left"><a href="https://www.chase.com/digital/resources/privacy-security/privacy/consumer-privacy-notice">How your data is shared</a>: &quot;we collect and share … account balances and transaction history … For nonaffiliates to market to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="choice-hotels"><a class="header-link" href="#choice-hotels"></a>Choice Hotels</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells guest info with third parties</td>
+<td align="left"><a href="https://www.choicehotels.com/choice-privileges/account/update">Opt-out</a> or email <a href="mailto:privacy@choicehotels.com">privacy@choicehotels.com</a></td>
+<td align="left"><a href="https://www.choicehotels.com/legal/privacy-policy">Policy</a>: &quot;Choice may partner with other companies to provide co-sponsored or co-branded promotions, sweepstakes, contests, products and services and may share your information with these companies.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="chownow"><a class="header-link" href="#chownow"></a>ChowNow</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://chownow-requests.my.onetrust.com/webform/67994022-0d2e-4da4-af0f-30b990afab7a/b16058fc-4ca6-4d7a-a18d-d18b292f7d11">Opt-out</a> or email <a href="mailto:privacy@chownow.com">privacy@chownow.com</a></td>
+<td align="left"><a href="https://get.chownow.com/privacy-policy">Policy</a>: &quot;We may from time to time share Contact Information and/or Other Information with other companies who may provide you information about the products and services they offer&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="comcast-xfinity"><a class="header-link" href="#comcast-xfinity"></a>Comcast Xfinity</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Targeted cable ads, sales mailings, more</td>
+<td align="left"><a href="https://www.xfinity.com/privacy/manage-optouts">Opt-out</a></td>
+<td align="left"><a href="https://www.xfinity.com/privacy/policy#info-control">Policy: Your choices</a></td>
+</tr>
+<tr>
+<td align="left">Postal mail ads</td>
+<td align="left">Call 1-800-COMCAST and ask to be added to &quot;Do Not Mail&quot; list</td>
+<td align="left"><a href="https://www.xfinity.com/corporate/legal/privacystatement#section8">Policy: Web site</a></td>
+</tr>
+</tbody></table>
+<h3 id="the-company-store"><a class="header-link" href="#the-company-store"></a>The Company Store</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares customer info with third parties</td>
+<td align="left"><a href="https://www.thecompanystore.com/exercise-my-privacy-rights/ccpa_form.html">Opt-out</a></td>
+<td align="left"><a href="https://www.thecompanystore.com/privacy-information-sharing.html">Policy</a>: &quot;we may share information with joint marketing partners&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="condé-nast"><a class="header-link" href="#condé-nast"></a>Condé Nast</h3>
+<p>Magazines: Allure, Architectural Digest, Ars Technica, Backchannel, Bon Appétit, Brides, Condé Nast Traveler, Epicurious, Glamour, Golf Digest, GQ, Pitchfork, Self, Teen Vogue, The New Yorker, Vanity Fair, Vogue, W, Wired, and <a href="https://www.condenast.com/">others</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells subscriber info with third parties</td>
+<td align="left">Email <a href="mailto:privacy_administration@condenast.com">privacy_administration@condenast.com</a></td>
+<td align="left"><a href="https://www.condenast.com/privacy-policy/">Policy</a>. &quot;we rent, sell, share, and transfer Personal Information to&quot; list buyers, advertising clients, &quot;data coops,&quot; consumer data suppliers - basically, to everyone and anyone who will pay for it</td>
+</tr>
+</tbody></table>
+<h3 id="costco"><a class="header-link" href="#costco"></a>Costco</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells members&#39; info with third parties</td>
+<td align="left"><a href="https://www.costco.com/DNSMIView">Opt-out</a> or use costco.com support chat, 1-800-774-2678, or checkbox on renewal form</td>
+<td align="left"><a href="https://www.costco.com/privacy-policy.html#disclosure">Policy</a>: &quot;We may share information about you with companies that offer their products and services for our and their marketing purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="corelogic"><a class="header-link" href="#corelogic"></a>CoreLogic</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Teletrack pre-approved offers</td>
+<td align="left">Call 1-877-309-5226 or <a href="https://www.corelogic.com/downloadable-docs/teletrack-out-opt-form.pdf">Opt-out</a></td>
+<td align="left"><a href="https://www.corelogic.com/solutions/corelogic-teletrack-consumer-assistance.aspx">Instructions</a>. Phone opt-out lasts 5 years; postal mail opt-out is permanent.</td>
+</tr>
+</tbody></table>
+<h3 id="crate--barrel"><a class="header-link" href="#crate--barrel"></a>Crate &amp; Barrel</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left"><a href="https://www.crateandbarrel.com/customer-service/sellingandsharing-request">Opt-out</a></td>
+<td align="left"><a href="https://www.crateandbarrel.com/customer-service/privacy-policy">Policy</a>: &quot;We share your customer information with other select companies whose products and services you may find useful. This information includes your name, postal address and email address, as well as a record of any transactions you conduct on our Websites or offline&quot;</td>
+</tr>
+<tr>
+<td align="left">Postal ads</td>
+<td align="left"><a href="https://www.crateandbarrel.com/customer-service/opt-out">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#cb2">CB2</a>.</p>
+<h3 id="disqus"><a class="header-link" href="#disqus"></a>Disqus</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells user info with third parties</td>
+<td align="left"><a href="https://help.disqus.com/en/articles/1717117-how-to-edit-your-data-sharing-settings">Account settings</a> or email <a href="mailto:privacy@disqus.com">privacy@disqus.com</a></td>
+<td align="left"><a href="https://help.disqus.com/en/articles/1717103-disqus-privacy-policy">Policy</a>: &quot;we share certain categories of personal data with third parties for their direct marketing purposes&quot;</td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#zeta-global">Zeta Global</a>.</p>
+<h3 id="edison"><a class="header-link" href="#edison"></a>Edison</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares de-identified data for competitive research</td>
+<td align="left">In email app settings, &quot;Manage Privacy&quot; page</td>
+<td align="left"><a href="https://www.edison.tech/privacy">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="facebook"><a class="header-link" href="#facebook"></a>Facebook</h3>
+<p>Includes: <strong>Instagram</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Privacy settings</td>
+<td align="left"><a href="https://www.facebook.com/settings?tab=privacy">Opt-out</a> and <a href="https://www.eff.org/deeplinks/2019/03/facebook-doubles-down-misusing-your-phone-number">remove your phone number</a></td>
+<td align="left"><a href="https://www.facebook.com/help/193677450678703?helpref=popular_topics">Instructions</a>. <a href="https://www.facebook.com/privacy/explanation">Policy</a>.</td>
+</tr>
+<tr>
+<td align="left">Ads and location data</td>
+<td align="left"><a href="https://www.facebook.com/about/ads">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="ford"><a class="header-link" href="#ford"></a>Ford</h3>
+<p>Includes: <strong>Lincoln</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells owner info and car/driving data with third parties</td>
+<td align="left"><a href="https://www.ford.com/help/privacy/ccpa/?ccpatype=donotsellmypi">Opt-out</a> and in FordPass or Lincoln Way apps</td>
+<td align="left"><a href="https://www.ford.com/help/privacy/">Policy</a>: &quot;We share information with partners with which we offer co-branded service or engage in joint marketing activities.&quot; &quot;</td>
+</tr>
+</tbody></table>
+<h3 id="frontier-communications"><a class="header-link" href="#frontier-communications"></a>Frontier Communications</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Phone data (&quot;CPNI&quot;) sharing</td>
+<td align="left"><a href="https://frontier.com/resources/cpni">Opt-out</a></td>
+<td align="left"><a href="https://frontier.com/corporate/privacy-policy">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="galls"><a class="header-link" href="#galls"></a>Galls</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:help-desk@galls.com">help-desk@galls.com</a> or call 1-866-673-7643</td>
+<td align="left"><a href="https://www.galls.com/pages/privacy">Policy</a>: &quot;personally identifiable information you submit to us is generally used to  … providing you promotional information for special offers or our products or for those of our parent company, subsidiaries, or other affiliated companies&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="gardeners-supply"><a class="header-link" href="#gardeners-supply"></a>Gardener&#39;s Supply</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://www.gardeners.com/forms/consumer-privacy">Opt-out</a></td>
+<td align="left"><a href="https://www.gardeners.com/help/privacy-policy#CA">Policy</a>. &quot;Gardener’s Supply may exchange, rent or sell certain personal information with third parties&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="google"><a class="header-link" href="#google"></a>Google</h3>
+<p><strong>Includes visitors who are not logged in to a Google account.</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Search history &amp; ad personalization</td>
+<td align="left"><a href="https://myactivity.google.com/privacyadvisor/search">Opt-out</a></td>
+<td align="left">If you browse Google without logging in, do this while not logged in.</td>
+</tr>
+<tr>
+<td align="left">Most services</td>
+<td align="left"><a href="https://myaccount.google.com/intro/privacycheckup/">Opt-out</a></td>
+<td align="left">Includes Gmail, Google Apps, &amp; location data. <a href="https://policies.google.com/privacy?hl=en#infochoices">Policy: Choices</a>.</td>
+</tr>
+<tr>
+<td align="left">Interest- and location-based ads (Android)</td>
+<td align="left"><a href="https://www.androidguys.com/tips-tools/how-to-disable-personalized-ads-on-android/">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#youtube">YouTube</a>.</p>
+<h3 id="guitar-center"><a class="header-link" href="#guitar-center"></a>Guitar Center</h3>
+<p>Includes: <strong>MusiciansFriend.com</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer postal addresses with third parties</td>
+<td align="left">Call 866-498-7882 (Guitar Center) or 1-800-449-9128 (Musician&#39;s Friend)</td>
+<td align="left"><a href="https://www.guitarcenter.com/pages/privacy-rights-policy">Policy</a>: &quot;may occasionally share its postal mailing list … with other organizations&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="hanes"><a class="header-link" href="#hanes"></a>Hanes</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:consumer.privacy@hanes.com">consumer.privacy@hanes.com</a></td>
+<td align="left"><a href="https://www.hanes.com/privacy-policy">Policy</a>: &quot;Sending catalogs, printed materials, offers and other announcements to postal addresses and allowing our affiliates and other reputable third-party marketers to do the same&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="hbo"><a class="header-link" href="#hbo"></a>HBO</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:WMPrivacy@warnermediagroup.com?subject=Your%20California%20Privacy%20Rights">WMPrivacy@warnermediagroup.com</a> with name, email/username, and postal address</td>
+<td align="left"><a href="https://play.hbonow.com/privacy">Policy</a>: &quot;We may also share Information with business partners and third parties … that may want to market products or services to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="hearst"><a class="header-link" href="#hearst"></a>Hearst</h3>
+<p>Magazines: Car and Driver, Cosmopolitan, Country Living, Dr. Oz, Elle, Esquire, Food Network Magazine, Good Housekeeping, Harper&#39;s Bazaar, HGTV Magazine, House Beautiful, Marie Claire, O, The Oprah Magazine, Popular Mechanics, Redbook, Road &amp; Track, Seventeen, Town&amp;Country, Veranda, Prevention, Men&#39;s Health, Woman&#39;s Day, Women&#39;s Health, and <a href="https://www.hearst.com/magazines">others</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells subscriber info with third parties</td>
+<td align="left"><a href="http://www.hearst.com/newsroom/us-magazines-privacy-notice#_YOUR_CHOICES">Opt-out</a> via postal mail only</td>
+<td align="left">Includes this distinctly terrible opt-out process: &quot;We may provide your contact information to third parties for their own marketing purposes. To request that third parties do not use your postal mailing contact information for their own marketing purposes (if we have your postal address), you may notify us in writing at [postal address]…&quot;</td>
+</tr>
+<tr>
+<td align="left">Shares/sells digital user info with third parties</td>
+<td align="left"><a href="https://optout.hearstmags.com/">Opt-out</a> (form 2)</td>
+<td align="left"><a href="https://www.hearst.com/-/us-magazines-privacy-notice">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="home-depot"><a class="header-link" href="#home-depot"></a>Home Depot</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left"><a href="https://www.homedepot.com/c/Manage_Marketing_Preferences">Opt-out</a></td>
+<td align="left"><a href="https://www.homedepot.com/c/Privacy_Security#Information_Sharing">Policy</a>: &quot;We share information with [financial product] third parties so that they can provide you with tailored information about products and services and special offers&quot; and &quot;we may share information with joint marketing partners&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="honda-motors"><a class="header-link" href="#honda-motors"></a>Honda Motors</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells owner info and car/driving data with third parties</td>
+<td align="left"><a href="https://crrs.secure.force.com/service/CCPA_Request_W2C">Opt-out</a> or call 1-800-999-1009, as well as in in-car interface</td>
+<td align="left"><a href="https://www.honda.com/privacy/privacy-policy.pdf">Policy</a>: &quot;We may share or sell limited elements of your Personal Information with other companies who do not provide services to us (“Third Parties”).&quot; <a href="http://www.honda.com/privacy/connected-product-privacy-policy.pdf">Vehicle data policy</a>: &quot;We share Covered Information with third parties who provide goods or services that may benefit vehicle owners, including insurance companies, Honda/Acura dealerships, and consumer goods or services companies, such as satellite radio providers and connected vehicle data services and analytics platforms&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="hoover"><a class="header-link" href="#hoover"></a>Hoover</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://hoover.com/pages/do-not-sell-my-personal-information">Opt-out</a></td>
+<td align="left"><a href="https://hoover.com/pages/terms-of-use-privacy-policy">Policy</a>: &quot;we will continue to share your information among our business units, our affiliates and unaffiliated third parties&quot;</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="hulu"><a class="header-link" href="#hulu"></a>Hulu</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Ad targeting</td>
+<td align="left"><a href="https://secure.hulu.com/privacy#YourChoices">Opt-out</a></td>
+<td align="left"><a href="https://www.hulu.com/privacy#SharingWithOthers">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="hyundai-motors"><a class="header-link" href="#hyundai-motors"></a>Hyundai Motors</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells owner info and car/driving data with third parties</td>
+<td align="left"><a href="https://owners.hyundaiusa.com/us/en/contact-us.html">Opt-out</a></td>
+<td align="left"><a href="https://www.hyundaiusa.com/us/en/owner-privacy-policy">Policy</a>: &quot;We may share certain Covered Information with dealers so that they and we may better respond to your requests, send your relevant and personalized offers and information&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="infotracer"><a class="header-link" href="#infotracer"></a>InfoTracer</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://infotracer.com/optout/">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="instant-checkmate"><a class="header-link" href="#instant-checkmate"></a>Instant Checkmate</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.instantcheckmate.com/opt-out/">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="intercontinental-hotels"><a class="header-link" href="#intercontinental-hotels"></a>InterContinental Hotels</h3>
+<p>Includes: <strong>Crowne Plaza, Holiday Inn, Kimpton,</strong> <a href="https://www.ihg.com/content/us/en/about/brands">others</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells guest info with third parties</td>
+<td align="left">In Rewards Club portal, <a href="https://www.ihg.com/hotels/us/en/customer-care/forms/privacy?hideBack=true&option=doNotSell">form</a>, or email <a href="mailto:privacyoffice@ihg.com">privacyoffice@ihg.com</a></td>
+<td align="left"><a href="https://www.ihg.com/content/us/en/customer-care/privacy_statement#information-we-collect">Policy</a>: &quot;We may also share your information with third parties … to extend special offers about their own products and services&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="kroger"><a class="header-link" href="#kroger"></a>Kroger</h3>
+<p>Includes: Fred Meyer, Harris Teeter, QFC, Ralphs, <a href="https://www.kroger.com/i/kroger-family-of-companies">others</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left">Email <a href="mailto:KrogerPrivacyOffice@Kroger.com">KrogerPrivacyOffice@Kroger.com</a> or call 1-800-576-4377</td>
+<td align="left"><a href="https://www.kroger.com/i/privacy-policy/how-we-share-information">Policy</a>: &quot;We may share your information to develop and provide special services or offers that may interest you.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="kustomer"><a class="header-link" href="#kustomer"></a>Kustomer</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates information from retailers about customers</td>
+<td align="left">To obtain or request deletion of your data, email <a href="mailto:privacy@kustomer.com">privacy@kustomer.com</a></td>
+<td align="left"><a href="https://www.kustomer.com/privacy/">Policy</a></td>
+</tr>
+</tbody></table>
+<p>Related: <a href="https://www.nytimes.com/2019/11/04/business/secret-consumer-score-access.html">How retailers score customers</a></p>
+<h3 id="lendingclub"><a class="header-link" href="#lendingclub"></a>LendingClub</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:privacy@lendingclub.com">privacy@lendingclub.com</a> or call 1-888-596-3157</td>
+<td align="left"><a href="https://www.lendingclub.com/legal/privacy-policy">Policy</a>. Includes SSN, income, account balances, transaction history, credit scores, and employment information</td>
+</tr>
+</tbody></table>
+<h3 id="lexis-nexis"><a class="header-link" href="#lexis-nexis"></a>Lexis-Nexis</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://optout.lexisnexis.com/">Opt-out</a></td>
+<td align="left"><a href="https://risk.lexisnexis.com/consumer-and-data-access-policies">Docs</a>. Excludes <a href="https://www.lexisnexis.com/en-us/privacy/for-consumers/opt-out-of-lexisnexis.page">this database</a>.</td>
+</tr>
+<tr>
+<td align="left">Direct marketing services</td>
+<td align="left"><a href="https://www.lexisnexis.com/privacy/directmarketingopt-out.aspx">Opt-out</a></td>
+<td align="left"><a href="https://risk.lexisnexis.com/consumer-and-data-access-policies">Docs</a></td>
+</tr>
+<tr>
+<td align="left">Credit offers (&quot;Risk Solutions&quot;)</td>
+<td align="left"><a href="https://risk.lexisnexis.com/prescreened-offers-optout">Opt-out</a></td>
+<td align="left"><a href="https://risk.lexisnexis.com/consumer-and-data-access-policies">Docs</a></td>
+</tr>
+</tbody></table>
+<h3 id="lg"><a class="header-link" href="#lg"></a>LG</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">TV</td>
+<td align="left">Don&#39;t agree to terms or policy on product UI, or don&#39;t buy product; California: <a href="https://www.lg.com/us/caprivacy">Opt-out</a> or email <a href="mailto:CAPrivacy@lge.com">CAPrivacy@lge.com</a></td>
+<td align="left"><a href="https://us.lgaccount.com/customer/terms_list?country=US&language=en-US&terms_div=update&terms_svcCode=SVC301&terms_type=A_PRV">Policy</a>, <a href="https://us.m.lgaccount.com/customer/terms_detail?country=US&language=en-US&terms_div=update&terms_svcCode=SVC202&terms_type=PRV_SMARTHOME">Policy</a></td>
+</tr>
+</tbody></table>
+<p>More information: <a href="https://www.techdirt.com/articles/20140511/17430627199/lg-will-take-smart-out-your-smart-tv-if-you-dont-agree-to-share-your-viewing-search-data-with-third-parties.shtml">LG Will Take The &#39;Smart&#39; Out Of Your Smart TV If You Don&#39;t Agree To Share…</a>, <a href="https://consumerreports.org/privacy/how-to-turn-off-smart-tv-snooping-features/">How to Turn Off Smart TV Snooping Features</a>, and <a href="https://www.nytimes.com/2018/07/23/smarter-living/how-to-stop-your-smart-tv-from-tracking-what-you-watch.html">How to Stop Your Smart TV From Tracking What You Watch</a>.</p>
+<h3 id="linkedin"><a class="header-link" href="#linkedin"></a>LinkedIn</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Privacy settings</td>
+<td align="left"><a href="https://www.linkedin.com/psettings/privacy">Opt-out</a></td>
+<td align="left"><a href="https://www.linkedin.com/help/linkedin/answer/66?trk=microsites-frontend_legal_privacy-policy&lang=en">Overview</a>. <a href="https://www.linkedin.com/legal/privacy-policy#choices">Policy: Choices</a>.</td>
+</tr>
+<tr>
+<td align="left">Ad targeting</td>
+<td align="left"><a href="https://www.linkedin.com/psettings/advertising">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#microsoft">Microsoft</a>.</p>
+<h3 id="little-league"><a class="header-link" href="#little-league"></a>Little League</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares participant info with third parties</td>
+<td align="left">Email <a href="mailto:Privacy@LittleLeague.org">Privacy@LittleLeague.org</a></td>
+<td align="left"><a href="https://www.littleleague.org/privacy-policy/">Policy</a>: &quot;We may share personal information with … organizations that sponsor or associate with Little League to offer information, coupons, special discounts, contests, games, promotions, and special events&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="liveramp"><a class="header-link" href="#liveramp"></a>LiveRamp</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates personal information from many merchants</td>
+<td align="left"><a href="https://optout.liveramp.com/opt_out">Opt-out</a></td>
+<td align="left"><a href="https://liveramp.com/privacy/service-privacy-policy/">Policy</a>: &quot;LiveRamp enables advertisers to display relevant ads to specific individuals through websites, mobile apps, email, and addressable TVs&quot;</td>
+</tr>
+</tbody></table>
+<h4 id="macys"><a class="header-link" href="#macys"></a>Macy&#39;s</h4>
+<p>Includes: <strong>Bloomingdale&#39;s</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left">Call 1-888-529-2254</td>
+<td align="left"><a href="https://www.customerservice-macys.com/app/answers/detail/a_id/595#how%20we%20share%20your%20information">Policy</a>: &quot;We may share your information … With Third Parties for Marketing Purposes. This may include third parties whose products or services we believe you may be interested. These third parties may also share your information with others.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="marriott-hotels"><a class="header-link" href="#marriott-hotels"></a>Marriott Hotels</h3>
+<p>Includes: <strong>Courtyard, Fairfield Inn, Le Meridien, Renaissance, Residence Inn, Ritz-Carlton, Sheraton, SpringHill Suites, St. Regis, W Hotels, Westin,</strong> <a href="https://www.marriott.com/marriott-brands.mi">others</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells guest info to third parties</td>
+<td align="left"><a href="https://app.onetrust.com/app/#/webform/e4eef8ab-3071-4679-a374-5847fbe290de">Opt-out</a>; <a href="https://www.marriott.com/about/ccpa/do-not-sell.mi">California residents</a>)</td>
+<td align="left"><a href="https://www.marriott.com/about/privacy.mi">Policy</a>: &quot;We disclose Personal Data and Other Data with select Strategic Business Partners who provide goods, services and offers … that we believe will be of interest to you.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="mastercard"><a class="header-link" href="#mastercard"></a>Mastercard</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregated consumer spending reports</td>
+<td align="left"><a href="https://www.mastercard.us/en-us/vision/corp-responsibility/commitment-to-privacy/privacy/data-analytics-opt-out.html">Opt-out</a></td>
+<td align="left"><a href="https://www.mastercard.us/en-us/vision/corp-responsibility/commitment-to-privacy/privacy.html#sharePersonalInfo">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="meredithtime-inc"><a class="header-link" href="#meredithtime-inc"></a>Meredith/Time Inc.</h3>
+<p>Magazines: Allrecipes, American Baby, American Patchwork, Better Homes and Gardens, Country Life, Diabetic Living, EatingWell, Entertainment Weekly, Every Day with Rachael Ray, Family Circle, FamilyFun, Fitness, Food &amp; Wine, InStyle, Living the Country Life, Midwest Living, Money, Parents, People, Practical Boat Owner, Real Simple, Shape, Siempre Mujer, Southern Living, Sports Illustrated, Successful Farming, and <a href="https://www.meredith.com/national-media/brands">others</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells subscriber info with third parties</td>
+<td align="left">Complete both <a href="http://www.meredith.com/offlinePrivacy.html">opt-out</a> and <a href="https://privacyportalde-cdn.onetrust.com/dsarwebform/2159c482-749a-49db-916b-475017a9efa5/424d0d20-a84d-41ed-9a27-379d31f2551d.html">opt-out</a></td>
+<td align="left"><a href="https://www.meredith.com/legal/privacy">Policy</a>: &quot;Some of our Brands share your personal information with third parties who we allow to use that information for their own commercial purposes.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="metlife"><a class="header-link" href="#metlife"></a>MetLife</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares customer info</td>
+<td align="left"><a href="https://www.metlife.com/about-us/privacy-policy/opting-out/online-opt-out/">Opt-out</a></td>
+<td align="left"><a href="https://www.metlife.com/about-us/privacy-policy/opting-out/">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="microsoft"><a class="header-link" href="#microsoft"></a>Microsoft</h3>
+<p><strong>Includes visitors who are not logged in to a Microsoft account.</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Ads, browsing data, and services</td>
+<td align="left"><a href="https://account.microsoft.com/privacy">Opt-out</a></td>
+<td align="left">Sites covers Xbox, Skype, Office, Bing. For logged-out users, <a href="https://account.microsoft.com/privacy/ad-settings/signedout">go here</a>. <a href="https://privacy.microsoft.com/en-US/">Policy</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="mindbodyonline"><a class="header-link" href="#mindbodyonline"></a>MindBodyOnline</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares user data with third parties</td>
+<td align="left">Email <a href="mailto:privacy@mindbodyonline.com?subject=Opt%20out%20of%20data%20sharing%20for%20marketing">privacy@mindbodyonline.com</a></td>
+<td align="left"><a href="https://company.mindbodyonline.com/legal/privacy-policy">Policy</a>: &quot;We may disclose your Personal Information … To third parties to permit them (or their own customers) to send you marketing communications, consistent with your choices. &quot;</td>
+</tr>
+</tbody></table>
+<h3 id="national-geographic"><a class="header-link" href="#national-geographic"></a>National Geographic</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells user data with third parties (NGP)</td>
+<td align="left"><a href="https://help.nationalgeographic.com/s/dataprivacyform">Opt-out</a></td>
+<td align="left"><a href="https://www.nationalgeographic.com/legal/privacy/#access">Policy</a>: &quot;National Geographic Partners will disclose your personal information … with our business partners, such as travel operators.&quot;</td>
+</tr>
+<tr>
+<td align="left">Shares/sells user data with third parties (NGS)</td>
+<td align="left">Email <a href="mailto:dataprivacy@ngs.org?subject=Opt%20out%20of%20data%20sharing%20and%20marketing;%20request%20for%20personal%20data">dataprivacy@ngs.org</a></td>
+<td align="left"><a href="https://www.nationalgeographic.com/legal/privacy/#disclosure">Policy</a>: &quot;Your information may be shared with selected third parties so that they may send you promotional materials about goods and services that they offer.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="nature-conservancy"><a class="header-link" href="#nature-conservancy"></a>Nature Conservancy</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells donor data with third parties</td>
+<td align="left">Email <a href="mailto:member@tnc.org">member@tnc.org</a> or call 1-800-628-6860</td>
+<td align="left"><a href="https://www.nature.org/en-us/about-us/who-we-are/accountability/privacy-policy/">Policy</a>: &quot;for the purpose of renting or exchanging with unaffiliated third party organizations for their own uses&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="netflix"><a class="header-link" href="#netflix"></a>Netflix</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Disable &quot;Matched Identifier Communications&quot;</td>
+<td align="left"><a href="https://www.netflix.com/MarketingCommunications">Opt-out</a></td>
+<td align="left">Also see <a href="https://www.netflix.com/YourAccount">Account</a>. <a href="https://help.netflix.com/legal/privacy">Policy</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="nrs"><a class="header-link" href="#nrs"></a>NRS</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:service@nrs.com">service@nrs.com</a> or call 1-877-677-4327</td>
+<td align="left"><a href="https://www.nrs.com/privacy">Policy</a>: &quot;From time to time NRS may share your name with other high-quality companies&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="nytimes"><a class="header-link" href="#nytimes"></a>NYTimes</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells print subscriber info with third parties</td>
+<td align="left">Email <a href="mailto:privacy@nytimes.com?subject=Shine%20the%20Light%20Opt%20Out">privacy@nytimes.com</a> with account and phone number</td>
+<td align="left"><a href="https://www.nytimes.com/subscription/privacy-policy#/privacy">Policy</a>: &quot;If you’re a U.S. print subscriber, we may share your name and mailing address (among other information) with other reputable companies…&quot;.</td>
+</tr>
+</tbody></table>
+<h3 id="office-depot-officemax"><a class="header-link" href="#office-depot-officemax"></a>Office Depot OfficeMax</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left">Email <a href="mailto:mailoptout@officedepot.com">mailoptout@officedepot.com</a></td>
+<td align="left"><a href="https://www.officedepot.com/cm/help/privacy-statement">Policy</a>: &quot;We share information [can include purchase history, name, contact information, and more] with our business and marketing partners.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="omaha-steaks"><a class="header-link" href="#omaha-steaks"></a>Omaha Steaks</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://www.omahasteaks.com/servlet/OnlineShopping?Dsp=5744">Opt-out</a></td>
+<td align="left"><a href="https://www.omahasteaks.com/info/Privacy-Policy#c6">Policy</a>: &quot;we may share personally identifiable information with unaffiliated third parties … [which] provide goods or services that we believe may be of interest to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="optoutprescreencom"><a class="header-link" href="#optoutprescreencom"></a>OptOutPrescreen.com</h3>
+<p>Unsolicited credit offers from: <strong>Equifax</strong>, <strong>Experian</strong>, <strong>Innovis</strong>, <strong>TransUnion</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Unsolicited credit offers</td>
+<td align="left"><a href="https://www.optoutprescreen.com/">Opt-out</a></td>
+<td align="left">Industry organization. 5 year or permanent opt-out.</td>
+</tr>
+</tbody></table>
+<h3 id="oracle-data-cloud"><a class="header-link" href="#oracle-data-cloud"></a>Oracle Data Cloud</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates personal information from for ad targeting</td>
+<td align="left"><a href="https://datacloudoptout.oracle.com/">Opt-out</a></td>
+<td align="left"><a href="https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html">Policy</a>. &quot;Offline information about you is obtained by Oracle from its offline partners such as brick-and-mortar retail stores, grocery stores and their associated loyalty card programs, payment card brands, catalog orders and consumer survey programs, and third parties who may not have a relationship with you and collect offline information from their offline partners.&quot; (previously BlueKai, Moat, Datalogix, and AddThis)</td>
+</tr>
+</tbody></table>
+<h3 id="paypal"><a class="header-link" href="#paypal"></a>PayPal</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Data sharing with third parties</td>
+<td align="left">Cannot opt out</td>
+<td align="left"><a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full#05">Policy</a> (in &quot;Consumer Privacy Notice&quot;): Data is shared &quot;For joint marketing with other financial companies&quot; and/or &quot;For our affiliates’ everyday business purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="peekyou"><a class="header-link" href="#peekyou"></a>PeekYou</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.peekyou.com/about/contact/optout/">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="people-search-now"><a class="header-link" href="#people-search-now"></a>People Search Now</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.peoplesearchnow.com/opt-out">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="pictureframescom"><a class="header-link" href="#pictureframescom"></a>PictureFrames.com</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left">Call 1-800-332-8884</td>
+<td align="left"><a href="https://www.pictureframes.com/customer-care/privacy-policy">Policy</a>: Your information, including &quot;information about your order(s),&quot; &quot;may also be shared with other marketers to bring you offers of interest&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="pinterest"><a class="header-link" href="#pinterest"></a>Pinterest</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Personalization</td>
+<td align="left"><a href="https://www.pinterest.com/settings/">Opt-out</a></td>
+<td align="left">Based on purchases and cross-site requests (part of <a href="https://www.pinterest.com/me/">Profile</a>). <a href="https://policy.pinterest.com/en/privacy-policy#section-how-and-when-we-share-information">Policy</a>:</td>
+</tr>
+</tbody></table>
+<h3 id="prosper"><a class="header-link" href="#prosper"></a>Prosper</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Account settings → “Communication Preferences&quot; → disable &quot;Optional Information Sharing&quot; or email <a href="mailto:privacy@prosper.com">privacy@prosper.com</a></td>
+<td align="left"><a href="https://www.prosper.com/plp/legal/privacy-policy/">Policy</a> (&quot;Federal Privacy Notice&quot;). Includes SSN, income, account balances, transaction history, credit scores, and employment information</td>
+</tr>
+</tbody></table>
+<h3 id="reddit"><a class="header-link" href="#reddit"></a>Reddit</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Ad personalization</td>
+<td align="left"><a href="https://www.reddit.com/personalization">Opt-out</a></td>
+<td align="left"><a href="https://www.redditinc.com/policies/privacy-policy#text-content5">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="retail-equation"><a class="header-link" href="#retail-equation"></a>Retail Equation</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates information from retailers about returned products</td>
+<td align="left">To obtain or request deletion of your data, email <a href="mailto:returnactivityreport@theretailequation.com">returnactivityreport@theretailequation.com</a></td>
+<td align="left"><a href="https://www.theretailequation.com/privacy-policy-us-canada/#types-of-data">Policy</a></td>
+</tr>
+</tbody></table>
+<p>Related: <a href="https://www.nytimes.com/2019/11/04/business/secret-consumer-score-access.html">How retailers score customers</a></p>
+<h3 id="riskified"><a class="header-link" href="#riskified"></a>Riskified</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates customer information from retailers</td>
+<td align="left">To obtain or request deletion of your data, email <a href="mailto:support@riskified.com">support@riskified.com</a></td>
+<td align="left"><a href="https://www.riskified.com/privacy/">Policy</a></td>
+</tr>
+</tbody></table>
+<p>Related: <a href="https://www.nytimes.com/2019/11/04/business/secret-consumer-score-access.html">How retailers score customers</a></p>
+<h3 id="rockler"><a class="header-link" href="#rockler"></a>Rockler</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:orders@rockler.com">orders@rockler.com</a> with your postal address</td>
+<td align="left"><a href="https://www.rockler.com/privacy-policy">Policy</a>: &quot;Occasionally, we make a portion of our mailing list available to respectable organizations that may interest our customers&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="roku"><a class="header-link" href="#roku"></a>Roku</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Analysis of what you&#39;re watching, ad targeting based on what you watched, and sharing de-identified viewing history</td>
+<td align="left">Opt-out in device (Settings &gt; Privacy menu)</td>
+<td align="left"><a href="https://docs.roku.com/published/userprivacypolicy/en/us">Policy</a></td>
+</tr>
+</tbody></table>
+<p>More information: <a href="https://consumerreports.org/privacy/how-to-turn-off-smart-tv-snooping-features/">How to Turn Off Smart TV Snooping Features</a> and <a href="https://www.nytimes.com/2018/07/23/smarter-living/how-to-stop-your-smart-tv-from-tracking-what-you-watch.html">How to Stop Your Smart TV From Tracking What You Watch</a>.</p>
+<h3 id="roomba-irobot"><a class="header-link" href="#roomba-irobot"></a>Roomba (iRobot)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">None; don&#39;t buy the product</td>
+<td align="left"><a href="https://www.irobot.com/legal/privacy-policy">Policy</a>: &quot;We may share your personal information… with selected third parties who we think may offer you products or services you may enjoy&quot;</td>
+</tr>
+</tbody></table>
+<ul class="list">
+<li>&quot;You may contact us at <a href="https://global.irobot.com/">global.irobot.com</a> to request your personal information be deleted from our systems&quot;, but no ongoing opt-out is available.</li>
+</ul>
+<h3 id="samsung"><a class="header-link" href="#samsung"></a>Samsung</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">TV: Analysis of what you&#39;re watching, ad targeting based on what you watched, and sharing de-identified viewing history</td>
+<td align="left">Menu &gt; Support &gt; Terms &amp; Policy or Menu &gt; Smart Hub &gt; Terms &amp; Policy, and submit <a href="https://www.samsung.com/us/privacy/ccpa">California Do Not Sell, access, and deletion requests</a></td>
+<td align="left"><a href="https://www.samsung.com/us/account/privacy-policy/">Policy</a> (excerpted below)</td>
+</tr>
+<tr>
+<td align="left">Phones &amp; TVs: Activity tracking &amp; ad personalization</td>
+<td align="left">See Policy</td>
+<td align="left"><a href="https://www.samsung.com/us/account/privacy-policy/samsungads/">Policy</a></td>
+</tr>
+</tbody></table>
+<ul class="list">
+<li>Televisions: &quot;the IBA Service will collect information about your TV viewing history (including information about the networks, channels, websites visited and programs viewed on your Samsung Smart TV and the amount of time spent viewing them) and Samsung Smart TV usage information (such as how long and often you use the apps on your Smart TV). We may use automatic content recognition (ACR) and other technologies to capture your TV viewing history. We also may obtain other behavioral and demographic data from trusted third-party data sources.&quot; &quot;We may share your personal information with … business partners&quot; - <a href="https://www.samsung.com/us/account/privacy-policy/">Policy</a> (which contains multiple policies concatenated into one page - scroll to &quot;Smart TV Supplement&quot;).</li>
+<li>&quot;You may, at any time, disable the Customization Service via the &quot;Customization Service&quot; option in the Settings menu of your Samsung Account&quot; (or app/device), as well as <a href="https://account.samsung.com">account.samsung.com</a></li>
+<li>Basically, read every setting or menu choice on any Samsung device you own. <a href="https://www.samsung.com/us/account/privacy-policy/">Policy</a> is distinctly less customer-friendly than its peer companies. If it can be retained and shared, it probably is.</li>
+</ul>
+<p>More information: <a href="https://consumerreports.org/privacy/how-to-turn-off-smart-tv-snooping-features/">How to Turn Off Smart TV Snooping Features</a> and <a href="https://www.nytimes.com/2018/07/23/smarter-living/how-to-stop-your-smart-tv-from-tracking-what-you-watch.html">How to Stop Your Smart TV From Tracking What You Watch</a>.</p>
+<h3 id="saatchi-art"><a class="header-link" href="#saatchi-art"></a>Saatchi Art</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info &amp; purchase history with third parties</td>
+<td align="left">Email <a href="mailto:legal@leafgroup.com">legal@leafgroup.com</a></td>
+<td align="left"><a href="https://www.saatchiart.com/privacy">Policy</a>: &quot;we may disclose… name, mailing address [and purchase history] to marketing companies for trade or rental purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="seattle-art-museum"><a class="header-link" href="#seattle-art-museum"></a>Seattle Art Museum</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/trades customer info with third parties</td>
+<td align="left">Email <a href="mailto:membership@seattleartmuseum.org">membership@seattleartmuseum.org</a></td>
+<td align="left"><a href="http://www.seattleartmuseum.org/about-sam/privacy-policy#use">Policy</a>: &quot;we occasionally trade our membership mailing list with sister arts organizations&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="seattle-times"><a class="header-link" href="#seattle-times"></a>Seattle Times</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:webmaster@seattletimes.com">webmaster@seattletimes.com</a></td>
+<td align="left"><a href="https://www.seattletimes.com/notices/privacy.html">Policy</a>: &quot;We may share your Personal Information with our business partners or co-marketers … [or] third parties that provide products and services that we think you may be interested in.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="sift"><a class="header-link" href="#sift"></a>Sift</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregates information from retailers about customers</td>
+<td align="left">To obtain or request deletion of your data, email <a href="mailto:privacy@privacy@sift.com">privacy@sift.com</a></td>
+<td align="left"><a href="https://sift.com/service-privacy#access-review">Policy</a></td>
+</tr>
+</tbody></table>
+<p>Related: <a href="https://www.nytimes.com/2019/11/04/business/secret-consumer-score-access.html">How retailers score customers</a></p>
+<h3 id="slashdot-media"><a class="header-link" href="#slashdot-media"></a>Slashdot Media</h3>
+<p>Includes: <strong>SourceForge</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells user info with third parties</td>
+<td align="left"><a href="https://privacyportal-cdn.onetrust.com/dsarwebform/611e70e2-1994-43ff-b07b-646df870db4b/c1c0acac-ab24-4dac-b3e6-43421a684626.html">Opt-out</a></td>
+<td align="left"><a href="https://slashdotmedia.com/privacy-statement/#C">Policy</a>: &quot;We may also share your Personal Information with our advertisers, vendors, and customers, including data profiling companies, business-to-business lead buyers, and data aggregation companies&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="southwest-airlines"><a class="header-link" href="#southwest-airlines"></a>Southwest Airlines</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells passenger information with third parties</td>
+<td align="left"><a href="https://t.iluv.southwest.com/webApp/swaAPP_DataPrivacy_OptOut">Opt-out</a></td>
+<td align="left"><a href="https://www.southwest.com/html/about-southwest/terms-and-conditions/privacy-policy-pol.html#Sharing_of_Information">Policy</a>: &quot;We may also share information about you … With our business partners, affiliates and other third parties for purposes of sending their own marketing.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="spokeo"><a class="header-link" href="#spokeo"></a>Spokeo</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.spokeo.com/optout">Opt-out</a></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="sprint"><a class="header-link" href="#sprint"></a>Sprint</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Targeted ads and de-identified usage data for reports</td>
+<td align="left"><a href="http://www.sprint.com/mychoices">Opt-out</a> and in phone settings</td>
+<td align="left"><a href="https://www.t-mobile.com/privacy-center/our-practices/privacy-policy">Policy</a>: &quot;We use your personal data [including Web browsing history] to … Advertise and market products and services from T‑Mobile and other companies to you, including through targeted advertising.&quot; <a href="https://www.t-mobile.com/privacy-center/education-and-resources/advertising-analytics">Advertising addendum</a>.</td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#t-mobile">T-Mobile</a>.</p>
+<h3 id="staples"><a class="header-link" href="#staples"></a>Staples</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left"><a href="https://submit-irm.trustarc.com/services/validation/2394f394-3df4-4051-bfa1-50c2cfa45f02">Opt-out</a></td>
+<td align="left"><a href="https://www.staples.com/hc?id=dbb94c10-973c-478b-a078-00e58f66ba32#How%20We%20Share%20Your%20Personal%20Information">Policy</a>: &quot;We may share your Personal Information with other parties … To notify you of offers for products or services that may be of interest to you.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="taunton-press"><a class="header-link" href="#taunton-press"></a>Taunton Press</h3>
+<p>Magazines: Fine Woodworking, Fine Homebuilding, and <a href="http://www.taunton.com/">others</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells subscriber info with third parties</td>
+<td align="left">Email <a href="mailto:privacy@taunton.com?subject=Direct%20Mail%20Opt-Out">privacy@taunton.com</a> with account number, mailing address, phone</td>
+<td align="left"><a href="http://www.taunton.com/privacy-policy/">Policy</a>: &quot;We may also rent your name, mailing address, and other information to reputable companies that provide marketing offers through direct mail&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="t-mobile"><a class="header-link" href="#t-mobile"></a>T-Mobile</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Marketing preferences</td>
+<td align="left"><a href="https://www.t-mobile.com/responsibility/privacy/privacy-choice/marketing-choice">Opt-out</a></td>
+<td align="left"><a href="https://www.t-mobile.com/privacy-center/our-practices/privacy-policy#infochoices">Policy: Choices</a></td>
+</tr>
+<tr>
+<td align="left">Targeted ads and de-identified usage data for reports</td>
+<td align="left"><a href="https://www.t-mobile.com/content/t-mobile/corporate/privacy-center/take-control-of-your-data/modal-dns.html">Opt-out</a> and in phone settings</td>
+<td align="left"><a href="https://www.t-mobile.com/privacy-center/our-practices/privacy-policy">Policy</a>: &quot;We use your personal data [including Web browsing history] to … Advertise and market products and services from T‑Mobile and other companies to you, including through targeted advertising.&quot; <a href="https://www.t-mobile.com/privacy-center/education-and-resources/advertising-analytics">Advertising addendum</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="transunion"><a class="header-link" href="#transunion"></a>TransUnion</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&quot;TLOxp&quot; data broker</td>
+<td align="left"><a href="https://www.transunion.com/optout">Opt-out</a></td>
+<td align="left"><a href="https://www.transunion.com/privacy/risk-alternative-data-solutions">Policy</a></td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#optoutprescreen.com">OptOutPrescreen.com</a>.</p>
+<h3 id="truepeoplesearch"><a class="header-link" href="#truepeoplesearch"></a>TruePeopleSearch</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://www.truepeoplesearch.com/removal">Opt-out</a></td>
+<td align="left"><a href="https://www.truepeoplesearch.com/privacy">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="trump-2020-campaign"><a class="header-link" href="#trump-2020-campaign"></a>Trump 2020 Campaign</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells donor info with third parties</td>
+<td align="left">Email <a href="mailto:privacy@donaldtrump.com">privacy@donaldtrump.com</a></td>
+<td align="left"><a href="https://www.donaldjtrump.com/privacy-policy">Policy</a>: &quot;we may use information we collect for … sale or exchange of Service user information and related data to a broker, political committee, or other non-profit or for-profit entity&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="tuft--needle"><a class="header-link" href="#tuft--needle"></a>Tuft &amp; Needle</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Call 1-800-216-6747</td>
+<td align="left"><a href="https://www.tuftandneedle.com/legal/privacy/#vii">Policy</a>: &quot;We may share or disclose your Personal Information … With our affiliated and unaffiliated service providers who are offering products or services that we believe may be of interest to you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="twitter"><a class="header-link" href="#twitter"></a>Twitter</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Data sharing and cross-site tracking</td>
+<td align="left"><a href="https://twitter.com/personalization">Opt-out</a></td>
+<td align="left">Part of <a href="https://twitter.com/settings/safety">account settings</a>. <a href="https://twitter.com/en/privacy">Policy</a></td>
+</tr>
+<tr>
+<td align="left">Tailored audiences</td>
+<td align="left"><a href="https://twitter.com/settings/your_twitter_data/audiences">Request advertiser list</a></td>
+<td align="left"><a href="https://business.twitter.com/en/help/campaign-setup/campaign-targeting/tailored-audiences.html">Intro to tailored audiences</a>. <a href="https://help.twitter.com/en/safety-and-security/privacy-controls-for-tailored-ads">Policy</a>. <a href="https://business.twitter.com/en/help/ads-policies/other-policy-requirements/policies-for-conversion-tracking-and-tailored-audiences.html">Policy for advertisers</a>.</td>
+</tr>
+</tbody></table>
+<h3 id="united-airlines"><a class="header-link" href="#united-airlines"></a>United Airlines</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells passenger information with third parties</td>
+<td align="left">Not provided (<a href="https://twitter.com/simpleoptout/status/1218335017824215040">requested 2020-01-17</a>)</td>
+<td align="left"><a href="https://www.united.com/ual/en/us/fly/privacy.html#how_use_information">Policy</a>: &quot;may also share your information with third parties for marketing purposes including but not limited to the third party’s own marketing or promotional purposes or other companies’ marketing purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="us-postal-service"><a class="header-link" href="#us-postal-service"></a>US Postal Service</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Sells change-of-address requests to third paries</td>
+<td align="left">Can&#39;t opt-out. Request &quot;Temporary&quot; (6 month) forwarding to prevent disclosure</td>
+<td align="left"><a href="https://moversguide.usps.com/mgo">Policy</a>: Information is sold &quot;to individuals or companies already in possession of your name and old mailing address, as an address correction service&quot; and &quot;to licensed service providers of the USPS to perform mailing list correction service of lists containing your name and old address.&quot;</td>
+</tr>
+</tbody></table>
+<p>Related: <a href="https://www.forbes.com/sites/adamtanner/2013/07/08/how-the-post-office-sells-your-new-address-with-anyone-who-pays-and-the-little-known-loophole-to-opt-out/">How can this be?</a></p>
+<h3 id="verizon"><a class="header-link" href="#verizon"></a>Verizon</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Phone data (&quot;CPNI&quot;) sharing</td>
+<td align="left">Wireless: <a href="https://www.vzw.com/myprivacy">Opt-out</a>; wired and business: Call 1-866-483-9700</td>
+<td align="left"><a href="https://www.verizon.com/about/privacy/customer-proprietary-network-information">Policy</a>: &quot;We may use and share your CPNI among our affiliates and agents to offer you services that are different from the services you currently purchase from us&quot;</td>
+</tr>
+<tr>
+<td align="left">Data sharing for personalizing TV, mobile, and Internet ads</td>
+<td align="left"><a href="https://www.verizon.com/about/privacy/full-privacy-policy#acc-item-34">Opt-out</a> (scroll through entire section)</td>
+<td align="left"><a href="https://www.verizon.com/about/privacy/full-privacy-policy#acc-item-32">Policy</a>; also see <a href="https://www.verizon.com/privacy/your-data">Dashboard</a></td>
+</tr>
+<tr>
+<td align="left">Credit data for marketing</td>
+<td align="left">Call 1-844-366-2879</td>
+<td align="left"><a href="https://www.verizon.com/about/privacy/full-privacy-policy#acc-item-34">Policy</a>: &quot;Wireline customers can limit the sharing of credit information within Verizon for the marketing of new products and services&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="visa"><a class="header-link" href="#visa"></a>Visa</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Aggregated consumer spending reports</td>
+<td align="left"><a href="https://marketingreportoptout.visa.com/OPTOUT/request.do">Opt-out</a></td>
+<td align="left"><a href="https://usa.visa.com/legal/global-privacy-notice/additional-privacy-information.html">Policy</a>: &quot;in some countries, Visa uses Card Transaction Data to generate data products that companies use to improve their marketing programs and identify interested consumers&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="vizio"><a class="header-link" href="#vizio"></a>Vizio</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Discloses detailed viewing history</td>
+<td align="left"><a href="http://www.vizio.com/viewingdata">Opt-out</a> (California residents: <a href="https://privacyportal-cdn.onetrust.com/dsarwebform/41aebd10-58ee-4c98-9dd5-aa66c9be664a/0099df9c-c0aa-4bf7-bd5f-7f4ff46768f6.html">request or request deletion</a> of data)</td>
+<td align="left"><a href="https://www.vizio.com/privacy">Policy</a> - <a href="https://www.vizio.com/en/terms/viewing-data-privacy-policy">Viewing Data Supplement</a>: &quot;licenses Viewing Data to analytics companies, media companies, advertisers, ad agencies, and other ad technology companies&quot;</td>
+</tr>
+<tr>
+<td align="left">Discloses SmartCast usage</td>
+<td align="left">Don&#39;t use app, don&#39;t register, and/or use &quot;Guest Mode&quot;</td>
+<td align="left"><a href="https://www.vizio.com/privacy">Policy</a> - <a href="https://www.vizio.com/en/terms/smartcast-privacy-policy">SmartCast Supplement</a></td>
+</tr>
+</tbody></table>
+<p>More information: <a href="https://www.ftc.gov/news-events/blogs/business-blog/2017/02/what-vizio-was-doing-behind-tv-screen">What Vizio was doing behind the TV screen</a>, <a href="https://consumerreports.org/privacy/how-to-turn-off-smart-tv-snooping-features/">How to Turn Off Smart TV Snooping Features</a>, and <a href="https://www.nytimes.com/2018/07/23/smarter-living/how-to-stop-your-smart-tv-from-tracking-what-you-watch.html">How to Stop Your Smart TV From Tracking What You Watch</a>.</p>
+<h3 id="vox"><a class="header-link" href="#vox"></a>Vox</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells user info with third parties</td>
+<td align="left"><a href="https://www.voxmedia.com/contact#donotsell">Opt-out</a></td>
+<td align="left"><a href="https://www.voxmedia.com/legal/privacy-notice#our-information-sharing-practice">Policy</a>: &quot;we may also share your information (including Personal Data) with third parties for their own direct marketing purposes&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="walmart"><a class="header-link" href="#walmart"></a>Walmart</h3>
+<p>Includes: <strong>Hayneedle, Jet.com, Moosejaw, Sam&#39;s Club</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with co-branding partners</td>
+<td align="left"><a href="https://cpa-ui.walmart.com/affirmation?brandCode=WMT&requestType=OPTOUT">Opt-out</a></td>
+<td align="left"><a href="https://corporate.walmart.com/privacy-security/walmart-privacy-policy">Policy</a>: &quot;We may share your personal information with companies that offer co-branded products or services&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="wells-fargo"><a class="header-link" href="#wells-fargo"></a>Wells Fargo</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares customer info &amp; transactions with affiliates</td>
+<td align="left"><a href="https://connect.secure.wellsfargo.com/auth/login/present?origin=cob&loginMode=jukePassword&serviceType=changePrivacyPreference&LOB=CONS">Opt-out</a> (Security &amp; Support → Change Privacy Preferences) or call 1-888-528-8460</td>
+<td align="left"><a href="https://www.wellsfargo.com/privacy-security/privacy/individuals/">Policy</a></td>
+</tr>
+</tbody></table>
+<h3 id="whitepagescom"><a class="header-link" href="#whitepagescom"></a>Whitepages.com</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Reverse lookup entry</td>
+<td align="left"><a href="https://support.whitepages.com/hc/en-us/articles/115010106908-How-do-I-edit-or-remove-a-personal-listing-">Opt-out</a></td>
+<td align="left">Follow both &quot;Removing the listing via our opt-out service&quot; and &quot;How to Remove your Premium Listing.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="whole-foods"><a class="header-link" href="#whole-foods"></a>Whole Foods</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer purchase history with third parties</td>
+<td align="left">Email <a href="mailto:privacyandterms@wholefoods.com?subject=Opt%20out%20of%20all%20data%20sharing%20and%20marketing&body=California%20Privacy%20Rights%20Request">privacyandterms@wholefoods.com</a></td>
+<td align="left"><a href="https://www.wholefoodsmarket.com/site-information/privacy-notice">Policy</a>: &quot;we may share Personal Information/Personal Data about you … With our business partners, affiliates and other third parties for purposes of sending their own marketing.&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="williams-sonoma"><a class="header-link" href="#williams-sonoma"></a>Williams-Sonoma</h3>
+<p>Includes <strong>Pottery Barn, West Elm, Rejuvenation</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:customerservice@williams-sonoma.com?subject=Opt%20out%20of%20all%20data%20sharing%20and%20marketing%20by%20all%20WS%20entities">customerservice@williams-sonoma.com</a> with name, postal address, email</td>
+<td align="left"><a href="https://www.williams-sonomainc.com/privacy/">Policy</a>: &quot;we might rent, exchange, share and/or cross-reference information, including contact information about you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="woodcraft"><a class="header-link" href="#woodcraft"></a>Woodcraft</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares/sells customer info with third parties</td>
+<td align="left">Email <a href="mailto:custserv@woodcraft.com">custserv@woodcraft.com</a></td>
+<td align="left"><a href="https://www.woodcraft.com/pages/privacypolicy">Policy</a>: &quot;We occasionally make our customer list (postal mailing list only) available to carefully screened companies whose products may interest you&quot;</td>
+</tr>
+</tbody></table>
+<h3 id="yahoooath"><a class="header-link" href="#yahoooath"></a>Yahoo/Oath</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Privacy controls</td>
+<td align="left"><a href="https://www.verizonmedia.com/policies/us/en/verizonmedia/privacy/controls/index.html">Opt-out</a></td>
+<td align="left"><a href="https://policies.yahoo.com/xa/en/yahoo/privacy/index.htm">Yahoo policy</a>. <a href="https://www.verizonmedia.com/policies/index.html">Verizon Media policy</a>.</td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#verizon">Verizon</a>.</p>
+<h3 id="yelp"><a class="header-link" href="#yelp"></a>Yelp</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Shares first name and individual site activity with businesses</td>
+<td align="left"><a href="https://www.yelp.com/profile_privacy">Opt-out</a></td>
+<td align="left"><a href="https://www.yelp.com/tos/privacy_policy#control-personal-data">Policy</a>: &quot;We may share information from or about you (such as [city, age, and gender, businesses you bookmark or call, or if you visit a business’s URL] … with businesses on Yelp.&quot; By default, shares first name and last initial with businesses.</td>
+</tr>
+</tbody></table>
+<h3 id="youtube"><a class="header-link" href="#youtube"></a>YouTube</h3>
+<p><strong>Includes visitors who are not logged in to a YouTube account.</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Watch history &amp; search history</td>
+<td align="left"><a href="https://www.youtube.com/feed/history">Opt-out</a></td>
+<td align="left">Turn on &quot;Pause Watch History,&quot; clear existing history, and repeat for &quot;Pause Search History.&quot; If you browse YouTube without logging in, do this while not logged in.</td>
+</tr>
+</tbody></table>
+<p>Also see <a href="#google">Google</a>.</p>
+<h3 id="zeta-global"><a class="header-link" href="#zeta-global"></a>Zeta Global</h3>
+<table>
+<thead>
+<tr>
+<th align="left">What?</th>
+<th align="left">Opt-out</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&quot;Zeta Data Cloud&quot; data broker</td>
+<td align="left"><a href="https://privacyportal-cdn.onetrust.com/dsarwebform/bc2d3301-11a5-4de5-b15e-ce796187a352/d0720d0f-d427-4a7d-a773-5d6793229f15.html">Opt-out</a> (or call 1-800-515-3793)</td>
+<td align="left"><a href="https://zetaglobal.com/privacy-policy/">Policy</a></td>
+</tr>
+</tbody></table>
+<br />
+<h1 id="suggestions"><a class="header-link" href="#suggestions"></a>Suggestions</h1>
+<h2 id="your-other-relationships"><a class="header-link" href="#your-other-relationships"></a>Your other relationships</h2>
+<p>Think about your other…</p>
+<ul class="list">
+<li>Internet-connected devices: if your TV, thermostat, toothbrush, speakers, or other household device has an Internet connection (even through Bluetooth), it probably sends some data to someone else.</li>
+<li>Magazine subscriptions: about half of magazines sell at least print subscriber data.</li>
+<li>Print catalogs/postal ads. When you receive a catalog or flyer, take a picture of the mailing label and email it to the company&#39;s support address with a request to be removed from all mailings. If you haven&#39;t ordered from the company, ask how they obtained your address.</li>
+<li>Financial services: Banks and anyone involved with your money or extending credit probably shares some data.</li>
+</ul>
+<h3 id="how-to-find-opt-out-choices-quickly"><a class="header-link" href="#how-to-find-opt-out-choices-quickly"></a>How to find opt-out choices quickly</h3>
+<p>For companies not listed here:</p>
+<ol class="list">
+<li>Navigate to a company&#39;s privacy policy by searching the Web for <code>companyname privacy policy</code>. Example: <a href="https://www.google.com/search?q=at%26t+privacy+policy">at&amp;t privacy policy</a></li>
+<li>Once viewing the privacy policy, skim it for a section called &quot;Your Choices.&quot;</li>
+<li>If you don&#39;t see a &quot;Your Choices&quot; link, use your browser to find within the page (Control-F/Command-F). Find for each of these 3 words: &quot;<code>opt</code>&quot; (such as &quot;opt-out&quot; and &quot;optout&quot;), &quot;<code>shar</code>&quot; (such as &quot;sharing&quot; and &quot;shared&quot;), and &quot;<code>disclos</code>&quot; (such as &quot;disclose&quot; and &quot;disclosure&quot;).</li>
+</ol>
+<h3 id="ready-made-opt-out-request"><a class="header-link" href="#ready-made-opt-out-request"></a>Ready-made opt-out request</h3>
+<p>If you need to email a vendor, here&#39;s a request which can be copy-and-pasted:</p>
+<p>Hello,</p>
+<p>Please remove me from all mailing lists (electronic, postal, and otherwise). Please opt me out of all data sharing.</p>
+<p>Please ensure I&#39;m not contacted again except regarding an action that I initiated (such as by placing an order or opening a support ticket), and that no information about me or my use of your services is disclosed except as may be required to deliver the service.</p>
+<p>Please reply when this is complete.</p>
+<p>Finally, please pass this on to the company&#39;s management team or your supervisor: I expect and deserve opt-in, self-service choices about how my data is used and how I&#39;m marketed to. I shouldn&#39;t need to opt-out, let alone by sending an email like this. I&#39;m disappointed that the company chose to violate my privacy rather than ensuring it has my informed consent. Because the company puts its own preferences above my own (and even above simple transparency), I can&#39;t trust it. I&#39;ll be much less likely to make a future purchase. Please move to opt-in, user-facing privacy and marketing choices.</p>
+<h1 id="related-work"><a class="header-link" href="#related-work"></a>Related work</h1>
+<ul class="list">
+<li><a href="https://www.eff.org/issues/privacy">EFF: Privacy</a></li>
+<li><a href="https://usableprivacy.org/">UsablePrivacy.org</a></li>
+</ul>
+</article>
+</body>
+</html>

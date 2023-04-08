@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+  <title>Markdown Table Formatter</title>
+  <script type="text/javascript">
+  function MarkdownTableFormatter() {
+  this.cells = new Array();
+  this.column_widths = new Array();
+  this.output_table = "";
+}
+MarkdownTableFormatter.prototype.add_missing_cell_columns = function() {
+  for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+    for (var col_i = 0, col_l = this.column_widths.length; col_i < col_l; col_i = col_i + 1) {
+      if (typeof this.cells[row_i][col_i] === 'undefined') {
+        this.cells[row_i][col_i] = '';
+      }      
+    }
+  }
+}
+MarkdownTableFormatter.prototype.format_table = function(table) {
+  this.import_table(table);
+  this.get_column_widths();
+  this.add_missing_cell_columns();
+  this.pad_cells_for_output();
+  // Header
+  this.output_table = "| ";
+  this.output_table += this.cells[0].join(" | ");
+  this.output_table += " |\n";
+  // Separator 
+  this.output_table += "|-";
+  this.output_table += this.cells[1].join("-|-");
+  this.output_table += "-|\n";
+  for (var row_i = 2, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+    this.output_table += "| ";
+    this.output_table += this.cells[row_i].join(" | ");
+    this.output_table += " |\n";
+  }
+}
+MarkdownTableFormatter.prototype.get_column_widths = function() {
+  this.column_widths = new Array();
+  for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+    for (var col_i = 0, col_l = this.cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
+      if (typeof this.column_widths[col_i] === 'undefined') {
+        this.column_widths[col_i] = this.cells[row_i][col_i].length;
+      }
+      else if (this.column_widths[col_i] < this.cells[row_i][col_i].length) {
+        this.column_widths[col_i] = this.cells[row_i][col_i].length;
+      }
+    }
+  }
+}
+MarkdownTableFormatter.prototype.import_table = function(table) {  
+  var table_rows = table.split("\n");
+  // Remove leading empty lines
+  while (table_rows[0].indexOf('|') == -1) {
+    table_rows.shift();
+  }
+  for (var row_i = 0, row_l = table_rows.length; row_i < row_l; row_i = row_i + 1) {
+    // TODO: Set up the indexes so that empty lines at either the top or bottom will
+    // be removed. Right now, this is only helpful for empty lines at the bottom.
+    if(table_rows[row_i].indexOf('|') == -1) {
+      continue;
+    }
+    this.cells[row_i] = new Array();
+    var row_columns = table_rows[row_i].split("\|");
+    for (var col_i = 0, col_l = row_columns.length; col_i < col_l; col_i = col_i + 1) {
+      this.cells[row_i][col_i] = row_columns[col_i]
+      this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/^\s+/g,"");
+      this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/\s+$/g,"");
+      // If it's the separator row, parse down the dashes
+      // Only do this if it matches to avoid adding a
+      // dash in an empty column and messing with the column widths.
+      if (row_i == 1) {
+        this.cells[row_i][col_i] = this.cells[row_i][col_i].replace(/-+/g,"-");
+      }
+    }
+  }
+  // Remove leading and trailing rows if they are empty.
+  this.get_column_widths();  
+  if (this.column_widths[0] == 0) {
+    for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+      this.cells[row_i].shift();
+    }
+  }
+  this.get_column_widths();
+  // check to see if the last item in column widths is empty
+  if (this.column_widths[ (this.column_widths.length - 1) ] == 0) {
+    for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+      // Only remove the row if it is in the proper last slot.
+      if (this.cells[row_i].length == this.column_widths.length) {
+        this.cells[row_i].pop();
+      }
+    }    
+  }
+  this.get_column_widths();
+}
+MarkdownTableFormatter.prototype.pad_cells_for_output = function() {
+  for (var row_i = 0, row_l = this.cells.length; row_i < row_l; row_i = row_i + 1) {
+    for (var col_i = 0, col_l = this.cells[row_i].length; col_i < col_l; col_i = col_i + 1) {
+      // Handle anything that's not the separator row
+      if (row_i != 1) {
+        while(this.cells[row_i][col_i].length < this.column_widths[col_i]) {
+          this.cells[row_i][col_i] += " ";
+        }
+      }
+      // Handle the separator row.
+      else {
+        while(this.cells[row_i][col_i].length < this.column_widths[col_i]) {
+          this.cells[row_i][col_i] += "-";
+        }
+      }
+    }
+  }
+}
+</script>
+<script>
+function format_table() {
+  var md_table_holder = document.getElementById('md_table_holder');
+  var mtf = new MarkdownTableFormatter();
+  mtf.format_table(md_table_holder.value)
+  md_table_holder.value = mtf.output_table;
+}
+function loadExample(example_number) {
+  var md_table_holder = document.getElementById('md_table_holder');
+  switch (example_number) {
+    case 1:
+      document.getElementById('md_table_holder').value = "| h1 | h2 | h3 |\n|-|-|-|\n| data1 | data2 | data3 |";
+      break;
+    case 2:
+      document.getElementById('md_table_holder').value = "h1 | h2 | h3\n-|-|-\ndata-1 | data-2 | data-3";
+      break;
+    case 3:
+      document.getElementById('md_table_holder').value = "| Header 1 | Header 2 | Header 3 |\n|----|---|-|\n| data1a | Data is longer than header | 1 |\n| d1b | add a cell|\n|lorem|ipsum|3|\n| | empty outside cells\n| skip| | 5 |\n| six | Morbi purus | 6 |";
+  }
+}
+  </script>
+  <style type="text/css">
+body { background-color: #e6e6e2; }
+#mainWrapper { width: 850px; margin: auto;}
+textarea { width: 850px; height: 300px; font-family: monospace; font-size: 14px; white-space: pre; word-wrap: normal; overflow-wrap: normal; overflow-x: scroll; }
+.footer { font-size: 13px; }
+#button_wrapper { text-align: right; padding-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div id="mainWrapper">
+    <h1>Markdown Table Formatter</h1>
+    <p>This tool formats basic MultiMarkdown style tables for easier plain text reading. It adds padding to all the cells to line up the pipe separators when using a mono-space font.</p>    
+    <p>To see what it's all about, try one of these examples, or format your own.</p>
+    <p>Load: 
+      <a href="#" onClick="loadExample(1); return false;">Example 1</a> - 
+      <a href="#" onClick="loadExample(2); return false;">Example 2</a> - 
+      <a href="#" onClick="loadExample(3); return false;">Example 3</a>
+    </p>
+    <form>  
+      <textarea id="md_table_holder"></textarea>
+      <div id="button_wrapper">
+        <input id="format_button" type="button" value="Format Table" onclick="format_table();"></input>
+      </div>
+    </form>    
+  <hr>  
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-54483606-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

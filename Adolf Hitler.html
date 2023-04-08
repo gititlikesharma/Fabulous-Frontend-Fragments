@@ -1,0 +1,556 @@
+<html>
+<head>
+  <title>Adolf Hitler Latest News</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+$(document).ready(function () {
+  var crimeInt = Math.round(Math.random() * 211);
+  var stateInt = Math.round(Math.random() * 49);
+  console.log(crimeInt);
+  console.log(stateInt);
+  if (crimeInt == 0) {
+    var crimeText = "abusive sexual contact";
+  } else if (crimeInt == 1) {
+    var crimeText = "advocating overthrow of government";
+  } else if (crimeInt == 2) {
+    var crimeText = "aggravated assault/battery";
+  } else if (crimeInt == 3) {
+    var crimeText = "aggravated identity theft";
+  } else if (crimeInt == 4) {
+    var crimeText = "aggravated sexual abuse";
+  } else if (crimeInt == 5) {
+    var crimeText = "aiming a laser pointer at an aircraft";
+  } else if (crimeInt == 6) {
+    var crimeText = "airplane hijacking";
+  } else if (crimeInt == 7) {
+    var crimeText = "anti-racketeering";
+  } else if (crimeInt == 8) {
+    var crimeText = "antitrust";
+  } else if (crimeInt == 9) {
+    var crimeText = "armed robbery";
+  } else if (crimeInt == 10) {
+    var crimeText = "arson";
+  } else if (crimeInt == 11) {
+    var crimeText = "assassination";
+  } else if (crimeInt == 12) {
+    var crimeText = "assault with a deadly weapon";
+  } else if (crimeInt == 13) {
+    var crimeText = "assaulting or killing federal officer";
+  } else if (crimeInt == 14) {
+    var crimeText = "assisting or instigating escape";
+  } else if (crimeInt == 15) {
+    var crimeText = "attempt to commit murder/manslaughter";
+  } else if (crimeInt == 16) {
+    var crimeText = "bank burglary";
+  } else if (crimeInt == 17) {
+    var crimeText = "bankruptcy fraud/embezzlement";
+  } else if (crimeInt == 18) {
+    var crimeText = "bank larceny";
+  } else if (crimeInt == 19) {
+    var crimeText = "bank robbery";
+  } else if (crimeInt == 20) {
+    var crimeText = "blackmail";
+  } else if (crimeInt == 21) {
+    var crimeText = "bombing matters";
+  } else if (crimeInt == 22) {
+    var crimeText = "bond default";
+  } else if (crimeInt == 23) {
+    var crimeText = "breaking and/or entering carrier facilities";
+  } else if (crimeInt == 24) {
+    var crimeText = "bribery crimes";
+  } else if (crimeInt == 25) {
+    var crimeText = "vertification of checks";
+  } else if (crimeInt == 26) {
+    var crimeText = "child abuse";
+  } else if (crimeInt == 27) {
+    var crimeText = "child eploitation";
+  } else if (crimeInt == 28) {
+    var crimeText = "child pornography";
+  } else if (crimeInt == 29) {
+    var crimeText = "civil action to retrain harassment of a victim or witness";
+  } else if (crimeInt == 30) {
+    var crimeText = "coercion";
+  } else if (crimeInt == 31) {
+    var crimeText = "commodities price fixing";
+  } else if (crimeInt == 32) {
+    var crimeText = "computer crime";
+  } else if (crimeInt == 33) {
+    var crimeText = "concealing escaped prisoner";
+  } else if (crimeInt == 34) {
+    var crimeText = "concealing person from arrest";
+  } else if (crimeInt == 35) {
+    var crimeText = "concealment of assets";
+  } else if (crimeInt == 36) {
+    var crimeText = "conspiracy";
+  } else if (crimeInt == 37) {
+    var crimeText = "conspiracy to impede or injure an officer";
+  } else if (crimeInt == 38) {
+    var crimeText = "conpempt of court";
+  } else if (crimeInt == 39) {
+    var crimeText = "continuing criminal enterprise";
+  } else if (crimeInt == 40) {
+    var crimeText = "conveying false information";
+  } else if (crimeInt == 41) {
+    var crimeText = "copyright matters";
+  } else if (crimeInt == 42) {
+    var crimeText = "counterfeiting";
+  } else if (crimeInt == 43) {
+    var crimeText = "counterintelligence crimes";
+  } else if (crimeInt == 44) {
+    var crimeText = "credit/debit card fraud";
+  } else if (crimeInt == 45) {
+    var crimeText = "crime aboard aircraft";
+  } else if (crimeInt == 46) {
+    var crimeText = "crimes on government reservations";
+  } else if (crimeInt == 47) {
+    var crimeText = "crimes on Indian reservations";
+  } else if (crimeInt == 48) {
+    var crimeText = "criminal contempt of court";
+  } else if (crimeInt == 49) {
+    var crimeText = "criminal forfeiture";
+  } else if (crimeInt == 50) {
+    var crimeText = "criminal infringement of copyright";
+  } else if (crimeInt == 51) {
+    var crimeText = "cyber crimes";
+  } else if (crimeInt == 52) {
+    var crimeText = "damage to religious property";
+  } else if (crimeInt == 53) {
+    var crimeText = "delivery to consignee";
+  } else if (crimeInt == 54) {
+    var crimeText = "demands against the US";
+  } else if (crimeInt == 55) {
+    var crimeText =
+      "destruction of aircraft or motor vehicles used in foreign commerce";
+  } else if (crimeInt == 56) {
+    var crimeText = "destruction of an energy facility";
+  } else if (crimeInt == 57) {
+    var crimeText = "destruction of property to prevent seizure";
+  } else if (crimeInt == 58) {
+    var crimeText =
+      "destruction of records in federal investigations and bankruptcy";
+  } else if (crimeInt == 59) {
+    var crimeText = "destruction of corporate audit records";
+  } else if (crimeInt == 60) {
+    var crimeText = "destruction of veteran's memorials";
+  } else if (crimeInt == 61) {
+    var crimeText = "detention of armed vessel";
+  } else if (crimeInt == 62) {
+    var crimeText = "disclosure of confidential information";
+  } else if (crimeInt == 63) {
+    var crimeText = "domestic security";
+  } else if (crimeInt == 64) {
+    var crimeText = "domestic terrorism";
+  } else if (crimeInt == 65) {
+    var crimeText = "domestic violence";
+  } else if (crimeInt == 66) {
+    var crimeText = "drive-by shooting";
+  } else if (crimeInt == 67) {
+    var crimeText = "drug abuse violations";
+  } else if (crimeInt == 68) {
+    var crimeText = "drug smuggling";
+  } else if (crimeInt == 69) {
+    var crimeText = "drug trafficking";
+  } else if (crimeInt == 70) {
+    var crimeText = "DUI/DWI on federal property";
+  } else if (crimeInt == 71) {
+    var crimeText = "economic espionage";
+  } else if (crimeInt == 72) {
+    var crimeText = "election law crimes";
+  } else if (crimeInt == 73) {
+    var crimeText = "embezzlement";
+  } else if (crimeInt == 74) {
+    var crimeText = "embezzlement against state";
+  } else if (crimeInt == 75) {
+    var crimeText = "entering train to commit crime";
+  } else if (crimeInt == 76) {
+    var crimeText = "enlistment to serve against the US";
+  } else if (crimeInt == 77) {
+    var crimeText = "environmental scheme crimes";
+  } else if (crimeInt == 78) {
+    var crimeText = "escaping custody/escaped federal prisoners";
+  } else if (crimeInt == 79) {
+    var crimeText = "examiner performing other services";
+  } else if (crimeInt == 80) {
+    var crimeText = "exportation of drugs";
+  } else if (crimeInt == 81) {
+    var crimeText = "extortion";
+  } else if (crimeInt == 82) {
+    var crimeText = "failure to appear on felony offence";
+  } else if (crimeInt == 83) {
+    var crimeText = "failure to pay legal child support obligations";
+  } else if (crimeInt == 84) {
+    var crimeText = "false bail";
+  } else if (crimeInt == 85) {
+    var crimeText = "false pretenses";
+  } else if (crimeInt == 86) {
+    var crimeText = "false statements relating to healthcare matters";
+  } else if (crimeInt == 87) {
+    var crimeText = "falsely claiming citizenship";
+  } else if (crimeInt == 88) {
+    var crimeText = "false declarations to grand jury";
+  } else if (crimeInt == 89) {
+    var crimeText = "false entries in records or interstate carriers";
+  } else if (crimeInt == 90) {
+    var crimeText = "false information and hoaxes";
+  } else if (crimeInt == 91) {
+    var crimeText = "false statement to obtain unemployment compensation";
+  } else if (crimeInt == 92) {
+    var crimeText = "federal aviation act";
+  } else if (crimeInt == 93) {
+    var crimeText = "federal civil rights violations";
+  } else if (crimeInt == 94) {
+    var crimeText = "female genital mutilation";
+  } else if (crimeInt == 95) {
+    var crimeText = "financial transactions with foreign government";
+  } else if (crimeInt == 96) {
+    var crimeText = "first degree murder";
+  } else if (crimeInt == 97) {
+    var crimeText = "flight to avoid prosecution or giving testimony";
+  } else if (crimeInt == 98) {
+    var crimeText = "forced labor";
+  } else if (crimeInt == 99) {
+    var crimeText = "forced rape";
+  } else if (crimeInt == 100) {
+    var crimeText = "forgery";
+  } else if (crimeInt == 101) {
+    var crimeText = "fraud activity in connection with electronic mail";
+  } else if (crimeInt == 102) {
+    var crimeText = "fraud against government";
+  } else if (crimeInt == 103) {
+    var crimeText = "genocide";
+  } else if (crimeInt == 104) {
+    var crimeText = "hacking crimes";
+  } else if (crimeInt == 105) {
+    var crimeText = "harboring terrorists";
+  } else if (crimeInt == 106) {
+    var crimeText = "harming animals used in law enforcement";
+  } else if (crimeInt == 107) {
+    var crimeText = "hate crime acts";
+  } else if (crimeInt == 108) {
+    var crimeText = "homicide";
+  } else if (crimeInt == 109) {
+    var crimeText = "hostage taking";
+  } else if (crimeInt == 110) {
+    var crimeText = "identity theft";
+  } else if (crimeInt == 111) {
+    var crimeText = "illegal pessession of firearms";
+  } else if (crimeInt == 112) {
+    var crimeText = "immigration offences";
+  } else if (crimeInt == 113) {
+    var crimeText = "impersonator making arrest or search";
+  } else if (crimeInt == 114) {
+    var crimeText = "importation of drugs";
+  } else if (crimeInt == 115) {
+    var crimeText = "influencing juror by writing";
+  } else if (crimeInt == 116) {
+    var crimeText = "injuring officer";
+  } else if (crimeInt == 117) {
+    var crimeText = "insider trading crimes";
+  } else if (crimeInt == 118) {
+    var crimeText = "insurnce fraud";
+  } else if (crimeInt == 119) {
+    var crimeText = "interference with the operation of a satellite";
+  } else if (crimeInt == 120) {
+    var crimeText = "international parental kidnapping";
+  } else if (crimeInt == 121) {
+    var crimeText = "international domestic violence";
+  } else if (crimeInt == 122) {
+    var crimeText = "interstate violation of protection order";
+  } else if (crimeInt == 123) {
+    var crimeText = "larceny";
+  } else if (crimeInt == 124) {
+    var crimeText = "lobbying with apropriated moneys";
+  } else if (crimeInt == 125) {
+    var crimeText = "mailing threatening communications";
+  } else if (crimeInt == 126) {
+    var crimeText = "major fraud against the US";
+  } else if (crimeInt == 127) {
+    var crimeText = "manslaughter";
+  } else if (crimeInt == 128) {
+    var crimeText = "medical/health care fraud";
+  } else if (crimeInt == 129) {
+    var crimeText = "missile systems designed to destroy aircraft";
+  } else if (crimeInt == 130) {
+    var crimeText = "misuse of passport";
+  } else if (crimeInt == 131) {
+    var crimeText = "misuse of visas, permits, or other documents";
+  } else if (crimeInt == 132) {
+    var crimeText = "molestation";
+  } else if (crimeInt == 133) {
+    var crimeText = "money laundering";
+  } else if (crimeInt == 134) {
+    var crimeText = "motor vehicle theft";
+  } else if (crimeInt == 135) {
+    var crimeText = "murder by a federal prisoner";
+  } else if (crimeInt == 136) {
+    var crimeText = "murder committed by drug-related drive-by shooting";
+  } else if (crimeInt == 137) {
+    var crimeText = "murder committed in federal government facility";
+  } else if (crimeInt == 138) {
+    var crimeText = "narcotics violations";
+  } else if (crimeInt == 139) {
+    var crimeText = "obstructing examination of financial institution";
+  } else if (crimeInt == 140) {
+    var crimeText = "obstruction of court orders";
+  } else if (crimeInt == 141) {
+    var crimeText = "obstruction of federal audit";
+  } else if (crimeInt == 142) {
+    var crimeText = "obstruction of justice";
+  } else if (crimeInt == 143) {
+    var crimeText = "obstruction of criminal investigations";
+  } else if (crimeInt == 144) {
+    var crimeText = "partial birth abortion";
+  } else if (crimeInt == 145) {
+    var crimeText = "penalties for neglect or refusal to answer subpoena";
+  } else if (crimeInt == 146) {
+    var crimeText = "peonage";
+  } else if (crimeInt == 147) {
+    var crimeText = "prejury";
+  } else if (crimeInt == 148) {
+    var crimeText = "picketing or parading";
+  } else if (crimeInt == 149) {
+    var crimeText = "pirating";
+  } else if (crimeInt == 150) {
+    var crimeText = "pesession of restricted persons";
+  } else if (crimeInt == 151) {
+    var crimeText = "posession of false papers to defraud the US";
+  } else if (crimeInt == 152) {
+    var crimeText = "posession of narcotics";
+  } else if (crimeInt == 153) {
+    var crimeText = "private correspondence with foreign government";
+  } else if (crimeInt == 154) {
+    var crimeText = "product tampering";
+  } else if (crimeInt == 155) {
+    var crimeText = "prohibition of illegal gambling businesses";
+  } else if (crimeInt == 156) {
+    var crimeText = "prostitution";
+  } else if (crimeInt == 157) {
+    var crimeText = "public corruption crimes";
+  } else if (crimeInt == 158) {
+    var crimeText = "racketeering";
+  } else if (crimeInt == 159) {
+    var crimeText = "radiological dispersal devices";
+  } else if (crimeInt == 160) {
+    var crimeText = "ransom money";
+  } else if (crimeInt == 161) {
+    var crimeText = "rape";
+  } else if (crimeInt == 162) {
+    var crimeText = "receiving the proceeds of extortion";
+  } else if (crimeInt == 163) {
+    var crimeText =
+      "recording or listening to grand or petit jury while deliberating";
+  } else if (crimeInt == 164) {
+    var crimeText = "reentry of alien removed on national security grounds";
+  } else if (crimeInt == 165) {
+    var crimeText = "reproduction of citizenship papers";
+  } else if (crimeInt == 166) {
+    var crimeText = "resistance to extradition agent";
+  } else if (crimeInt == 167) {
+    var crimeText = "rescue of seized peoperty";
+  } else if (crimeInt == 168) {
+    var crimeText =
+      "retaliating against a federal judge by false claim or slander of title";
+  } else if (crimeInt == 169) {
+    var crimeText = "retaliating against a witness, victim, or an informant";
+  } else if (crimeInt == 170) {
+    var crimeText = "robbery";
+  } else if (crimeInt == 171) {
+    var crimeText = "robberies or burglaries involving controlled substances";
+  } else if (crimeInt == 172) {
+    var crimeText = "sabotage";
+  } else if (crimeInt == 173) {
+    var crimeText = "sale of citizenship papers";
+  } else if (crimeInt == 174) {
+    var crimeText = "sale of stolen vehicles";
+  } else if (crimeInt == 175) {
+    var crimeText = "searches without warrant";
+  } else if (crimeInt == 176) {
+    var crimeText = "second degree murder";
+  } else if (crimeInt == 177) {
+    var crimeText = "serial murders";
+  } else if (crimeInt == 178) {
+    var crimeText = "sexual abuse";
+  } else if (crimeInt == 179) {
+    var crimeText = "sexual abuse of a minor";
+  } else if (crimeInt == 180) {
+    var crimeText = "sexual assault";
+  } else if (crimeInt == 181) {
+    var crimeText = "sexual battery";
+  } else if (crimeInt == 182) {
+    var crimeText = "sexual conduct with a minor";
+  } else if (crimeInt == 183) {
+    var crimeText = "sexual eploitation";
+  } else if (crimeInt == 184) {
+    var crimeText = "sex trafficking";
+  } else if (crimeInt == 185) {
+    var crimeText = "shoplifting";
+  } else if (crimeInt == 186) {
+    var crimeText = "smuggling";
+  } else if (crimeInt == 187) {
+    var crimeText = "solicitation to commit a crime of violence";
+  } else if (crimeInt == 188) {
+    var crimeText = "stalking";
+  } else if (crimeInt == 189) {
+    var crimeText = "stolen property";
+  } else if (crimeInt == 190) {
+    var crimeText = "subornation of prejury";
+  } else if (crimeInt == 191) {
+    var crimeText = "tampering with a witness, victim or informant";
+  } else if (crimeInt == 192) {
+    var crimeText = "tampering with consumer products";
+  } else if (crimeInt == 193) {
+    var crimeText = "tampering with vessels";
+  } else if (crimeInt == 194) {
+    var crimeText = "theft of trade secrets";
+  } else if (crimeInt == 195) {
+    var crimeText = "torture";
+  } else if (crimeInt == 196) {
+    var crimeText = "trafficking in counterfeit goods or services";
+  } else if (crimeInt == 197) {
+    var crimeText = "transportation into state prohibiting sale";
+  } else if (crimeInt == 198) {
+    var crimeText = "transportation of slaves from US";
+  } else if (crimeInt == 199) {
+    var crimeText = "transportation of stolen vehicles";
+  } else if (crimeInt == 200) {
+    var crimeText = "transportation of terrorists";
+  } else if (crimeInt == 201) {
+    var crimeText = "tresspassing";
+  } else if (crimeInt == 202) {
+    var crimeText = "treason";
+  } else if (crimeInt == 203) {
+    var crimeText = "unauthorized removal of classified documents";
+  } else if (crimeInt == 204) {
+    var crimeText = "use of fire or explosives to destroy property";
+  } else if (crimeInt == 205) {
+    var crimeText = "use of weapons of mass destruction";
+  } else if (crimeInt == 206) {
+    var crimeText = "vandalism";
+  } else if (crimeInt == 207) {
+    var crimeText = "video voyeurism";
+  } else if (crimeInt == 208) {
+    var crimeText = "violation of governing atomic weapons";
+  } else if (crimeInt == 209) {
+    var crimeText = "violence at international airports";
+  } else if (crimeInt == 210) {
+    var crimeText = "violent crimes in aid of a racketeering activity";
+  } else if (crimeInt == 211) {
+    var crimeText = "willful wrecking of a train resulting in death";
+  }
+  if (stateInt == 0) {
+    var stateText = "Alabama";
+  } else if (stateInt == 1) {
+    var stateText = "Alaska";
+  } else if (stateInt == 2) {
+    var stateText = "Arizona";
+  } else if (stateInt == 3) {
+    var stateText = "Arkansas";
+  } else if (stateInt == 4) {
+    var stateText = "California";
+  } else if (stateInt == 5) {
+    var stateText = "Colorado";
+  } else if (stateInt == 6) {
+    var stateText = "Connecticut";
+  } else if (stateInt == 7) {
+    var stateText = "Delaware";
+  } else if (stateInt == 8) {
+    var stateText = "Florida";
+  } else if (stateInt == 9) {
+    var stateText = "Georgia";
+  } else if (stateInt == 10) {
+    var stateText = "Hawaii";
+  } else if (stateInt == 11) {
+    var stateText = "Idaho";
+  } else if (stateInt == 12) {
+    var stateText = "Illinois";
+  } else if (stateInt == 13) {
+    var stateText = "Indiana";
+  } else if (stateInt == 14) {
+    var stateText = "Iowa";
+  } else if (stateInt == 15) {
+    var stateText = "Kansas";
+  } else if (stateInt == 16) {
+    var stateText = "Kentucky";
+  } else if (stateInt == 17) {
+    var stateText = "Louisiana";
+  } else if (stateInt == 18) {
+    var stateText = "Maine";
+  } else if (stateInt == 19) {
+    var stateText = "Maryland";
+  } else if (stateInt == 20) {
+    var stateText = "Massacheusetts";
+  } else if (stateInt == 21) {
+    var stateText = "Michigan";
+  } else if (stateInt == 22) {
+    var stateText = "Minnesota";
+  } else if (stateInt == 23) {
+    var stateText = "Mississippi";
+  } else if (stateInt == 24) {
+    var stateText = "Missouri";
+  } else if (stateInt == 25) {
+    var stateText = "Montana";
+  } else if (stateInt == 26) {
+    var stateText = "Nebraska";
+  } else if (stateInt == 27) {
+    var stateText = "Nevada";
+  } else if (stateInt == 28) {
+    var stateText = "New Hampshire";
+  } else if (stateInt == 29) {
+    var stateText = "New Jersey";
+  } else if (stateInt == 30) {
+    var stateText = "New Mexico";
+  } else if (stateInt == 31) {
+    var stateText = "New York";
+  } else if (stateInt == 32) {
+    var stateText = "North Carolina";
+  } else if (stateInt == 33) {
+    var stateText = "North Dakota";
+  } else if (stateInt == 34) {
+    var stateText = "Ohio";
+  } else if (stateInt == 35) {
+    var stateText = "Oklahoma";
+  } else if (stateInt == 36) {
+    var stateText = "Oregon";
+  } else if (stateInt == 37) {
+    var stateText = "Pennsylvania";
+  } else if (stateInt == 38) {
+    var stateText = "Rhode Island";
+  } else if (stateInt == 39) {
+    var stateText = "South Carolina";
+  } else if (stateInt == 40) {
+    var stateText = "South Dakota";
+  } else if (stateInt == 41) {
+    var stateText = "Tennessee";
+  } else if (stateInt == 42) {
+    var stateText = "Texas";
+  } else if (stateInt == 43) {
+    var stateText = "Utah";
+  } else if (stateInt == 44) {
+    var stateText = "Vermont";
+  } else if (stateInt == 45) {
+    var stateText = "Virginia";
+  } else if (stateInt == 46) {
+    var stateText = "Washington";
+  } else if (stateInt == 47) {
+    var stateText = "West Virginia";
+  } else if (stateInt == 48) {
+    var stateText = "Wisconsin";
+  } else if (stateInt == 49) {
+    var stateText = "Wyoming";
+  }
+  console.log(crimeText);
+  console.log(stateText);
+  $("#outputText").html(
+    "Breaking News: Adolf Hitler has been charged with " +
+      crimeText +
+      " in the state of " +
+      stateText +
+      "."
+  );
+});
+</script>
+</head>
+<body>
+  <h1 id="outputText"></h1>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Megasymbol to Megabit Converter</title>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function calculate()
+{
+   var mod = document.forms[0].mod.value;
+   var fec = eval(document.forms[0].fec.value);
+   var msps = document.forms[0].msps.value;
+   var speed = mod * fec * msps;
+   document.getElementById("mbps").innerHTML = speed;
+   document.getElementById("megs").innerHTML = speed / 8;
+}
+window.onload = function (e)
+{
+   calculate();
+}
+</script>
+</head>
+<body>
+<form>
+Data Rate, in megasymbols per second:<br />
+<input type="text" value="1.0" name="msps" onchange="calculate();"><br />
+Forward Error Correction (FEC):<br />
+<input type="radio" value="1/2" name="fec" onchange="calculate();" id="fec_1/2">
+<label for="fec_1/2">1/2</label><br />
+<input type="radio" value="2/3" name="fec" onchange="calculate();" id="fec_2/3">
+<label for="fec_2/3">2/3</label><br />
+<input type="radio" value="3/4" name="fec" onchange="calculate();" id="fec_3/4">
+<label for="fec_3/4">3/4</label><br />
+<input type="radio" value="7/8" name="fec" onchange="calculate();" id="fec_7/8" checked="checked">
+<label for="fec_7/8">7/8</label><br />
+Modulation:<br />
+<input type="radio" value="1" name="mod" onchange="calculate();" id="mod_bpsk">
+<label for="mod_bpsk">BPSK</label><br />
+<input type="radio" value="2" name="mod" onchange="calculate();" id="mod_qpsk">
+<label for="mod_qpsk">QPSK</label><br />
+<input type="radio" value="3" name="mod" onchange="calculate();" id="mod_8psk" checked="checked">
+<label for="mod_8psk">8PSK</label><br />
+<input type="radio" value="4" name="mod" onchange="calculate();" id="mod_qam">
+<label for="mod_qam">QAM</label><br />
+</form>
+<div>Effective throughput is <span id="mbps">0</span> Mbps (<span id="megs">0</span> MBps).</div>
+</body>
+</html>
