@@ -1,0 +1,214 @@
+<html lang=en>
+<head>
+    <title>WOD Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="cyan">
+    <script>
+        "use strict";
+        const joints = ["ankle", "knee", "hip", "shoulder", "elbow"];
+        class Movement {
+            constructor(extorsion, joints, exercises) {
+                this.extorsion = extorsion;
+                this.joints = joints;
+                this.exercises = exercises;
+            }
+        }
+        const movements = [
+            new Movement('Knee extension', ['knee', 'ankle'], new Map([
+                ['Barbell', ['Back squat', 'Front squat', 'Overhead squat', 'Zercher squat']],
+                ['Dumbbell', ['Goblet squat']],
+                ['Kettlebell', ['Goblet squat']],
+                ['Sled', ['Backward drag', 'Forward drag']],
+                ['Box', ['Box Jump', 'Step Up']],
+                ['Medicine Ball', ['Squat', 'Wall ball']],
+                ['Bodyweight', ['Air Squat', 'Nordic hamstring curl']]])),
+            new Movement('Hip extension', ['hip'], new Map([
+                ['Barbell', ['Conventional Deadlift', 'Sumo Deadlift', 'Power Clean', 'Snatch', 'Hip Thrust']],
+                ['Medicine Ball', ['Clean']],
+                ['Bodyweight', ['Hip Thrust']],
+                ['Band', ['Hip Thrust']],
+                ['Kettlebell', ['Swing', 'Snatch', 'Clean', 'Turkish Get-up']]])),
+            new Movement('Hip flexion', ['hip'], new Map([
+                ['Pull-up Bar', ['Leg Tuck', 'Toes to Bar']],
+                ['Medicine Ball', ['Slam', 'Sit-up']],
+                ['Bodyweight', ['Sit-up', 'Crunch', 'Hollow Rocker']]])),
+            new Movement('Vertical elbow extension', ['shoulder', 'elbow'], new Map([
+                ['Barbell', ['Press', 'Push Press']],
+                ['Dumbbell', ['Press', 'Push Press']],
+                ['Bodyweight', ['Handstand Push-up']],
+                ['Box', ['Dip']],
+                ['TRX', ['Dip']],
+                ['Kettlebell', ['Press', 'Push Press']]])),
+            new Movement('Vertical elbow flexion', ['shoulder', 'elbow'], new Map([
+                ['Pull-up Bar', ['Pull-up', 'Chin-up', 'Straight-arm Pull']],
+                ['TRX', ['Pull-up']]])),
+            new Movement('Longitudinal elbow extension', ['shoulder', 'elbow'], new Map([
+                ['Barbell', ['Bench Press', 'Floor Press']],
+                ['Dumbbell', ['Bench Press', 'Floor Press']],
+                ['Band', ['Pallof Press']],
+                ['TRX', ['Push-up']],
+                ['Bodyweight', ['Push-up']]])),
+            new Movement('Longitudinal elbow flexion', ['shoulder', 'elbow'], new Map([
+                ['Barbell', ['Bent-over Row']],
+                ['Dumbbell', ['Kroc Row', 'Bent-over Row']],
+                ['Kettlebell', ['Kroc Row', 'Bent-over Row']],
+                ['Sled', ['Hand-over-hand Drag']],
+                ['TRX', ['Row']],
+                ['Pull-up Bar', ['Horizontal Pull-up']]]))
+        ];
+        const reps = new Map();
+        reps.set('Strength', ['5-5-5-5-5', '5-5-5', '1-1-1-1-1', '1-1-1-1-1-1-1-1', '1-1-1-1-1-1-1-1-1-1-1-1']);
+        reps.set('Conditioning', ['21-15-9', '10-9-8-7-6-5-4-3-2-1', '5-3-3-1-1-1', '5-5-3-3-3-1-1-1-1']);
+        reps.set('Hypertrophy', ['8-8-8', '10-10-10', '12-12-12', '10-10-10-10-10', '10-10-10-10-10-10-10-10-10-10']);
+        function generateWod() {
+            // filter movements by joint.
+            const m = movements.filter(constraint => !constraint.joints.map(joint => document.getElementById(joint).checked).includes(false));
+            // number of movements in this WOD.
+            const n = Math.min(parseInt(document.getElementById('n').value), m.length);
+            // randomly select n movements from m.
+            const wod = new Set();
+            while (wod.size < n) {
+                wod.add(m[Math.floor(Math.random() * m.length)]);
+            }
+            // select a CrossFit-style set/rep scheme by desired outcome.
+            const repRanges = reps.get(document.getElementById('goal').value);
+            const scheme = repRanges[Math.floor(Math.random() * repRanges.length)];
+            // for each movement in the WOD, select a specific exercise to perform based on equipment available.
+            let str = scheme + '\n';
+            wod.forEach(movement => {
+                // Build a list of all possible exercises given equipment available.
+                const possibilities = [];
+                movement.exercises.forEach((exercises, instrument) => exercises.forEach(exercise => {
+                    if (document.getElementById(instrument) == null) {
+                        console.error(instrument);
+                    }
+                    if (document.getElementById(instrument).checked) {
+                        possibilities.push([instrument, exercise]);
+                    }
+                }));
+                // If the list is not empty, select a random valid combination of an instrument and exercise.
+                if (possibilities) {
+                    const selectedCombination = possibilities[Math.floor(Math.random() * possibilities.length)];
+                    const instrument = selectedCombination[0];
+                    const exercise = selectedCombination[1];
+                    str += `${instrument} ${exercise}\n`;
+                }
+            });
+            // Write the WOD to the screen.
+            document.getElementById('output').value = str;
+        }
+
+        function setRandomGoal() {
+            document.getElementById('goal').value = document.getElementById('goal')[Math.floor(document.getElementById('goal').length * Math.random())].value;
+            document.getElementById('n').value = Math.max(1, Math.floor(Math.random() * movements.length));
+        }
+
+    </script>
+    <style>
+        label {
+            width: 120px;
+            display: inline-block;
+        }
+        .container {
+            display: flex;
+        }
+        .column {
+            Box-sizing: border-Box;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body style="background-color:lightcyan" onload="setRandomGoal(); generateWod();">
+    <h1>WOD Generator</h1>
+    <div class=container>
+        <div class=column>
+            <h3>Joints</h3>
+            <div>
+                <label for=ankle>Ankle</label>
+                <input type=checkBox id=ankle checked />
+            </div>
+            <div>
+                <label for=knee>Knee</label>
+                <input type=checkBox id=knee checked />
+            </div>
+            <div>
+                <label for=hip>Hip/Spine</label>
+                <input type=checkBox id=hip checked />
+            </div>
+            <div>
+                <label for=shoulder>Shoulder</label>
+                <input type=checkBox id=shoulder checked />
+            </div>
+            <div>
+                <label for=elbow>Elbow/Wrist</label>
+                <input type=checkBox id=elbow checked />
+            </div>
+        </div>
+        <div class=column>
+            <h3>Equipment</h3>
+            <div>
+                <label for=Barbell>Barbell</label>
+                <input type=checkBox id=Barbell checked />
+            </div>
+            <div>
+                <label for=Dumbbell>Dumbbell</label>
+                <input type=checkBox id=Dumbbell checked />
+            </div>
+            <div>
+                <label for=Kettlebell>Kettlebell</label>
+                <input type=checkBox id=Kettlebell checked />
+            </div>
+            <div>
+                <label for=Sled>Sled</label>
+                <input type=checkBox id=Sled checked />
+            </div>
+            <div>
+                <label for=Band>Resistance Band</label>
+                <input type=checkBox id=Band checked />
+            </div>
+            <div>
+                <label for='Pull-up Bar'>Pull-up Bar</label>
+                <input type=checkBox id='Pull-up Bar' checked />
+            </div>
+            <div>
+                <label for=Box>Box</label>
+                <input type=checkBox id=Box checked />
+            </div>
+            <div>
+                <label for=TRX>TRX</label>
+                <input type=checkBox id=TRX checked />
+            </div>
+            <div>
+                <label for='Medicine Ball'>Medicine Ball</label>
+                <input type=checkBox id='Medicine Ball' checked />
+            </div>
+            <div>
+                <label for=Bodyweight>Bodyweight</label>
+                <input type=checkBox id=Bodyweight checked />
+            </div>
+        </div>
+        <div class=column>
+            <h3>WOD</h3>
+            <p>
+                <label for=goal>Goal</label>
+                <select id=goal>
+                    <option value='Strength'>Strength</option>
+                    <option value='Conditioning'>Conditioning</option>
+                    <option value='Hypertrophy'>Hypertrophy</option>
+                </select>
+            </p>
+            <p>
+                <label for=n>Movements</label>
+                <input type=number id=n min=1 max=7 step=1 value=3 />
+            </p>
+            <p>
+                <button type=button id=generate onclick='generateWod();'>Generate</button>
+            </p>
+        </div>
+    </div>
+    <p>
+        <textarea id=output cols=80 rows=8></textarea>
+    </p>
+</body>
+</html>

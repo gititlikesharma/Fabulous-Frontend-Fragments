@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+<title>The XY Problem</title>
+<style>
+#container{max-width:70ch;padding:2ch;margin:auto;background:#fff}#header{background:#ccc;padding:20px}#header h1{margin:0}#navigation{float:left;width:100%;background:#333}#navigation ul{margin:0;padding:0}#navigation ul li{list-style-type:none;display:inline}#navigation li a{display:block;float:left;padding:5px 10px;color:#fff;text-decoration:none;border-right:1px solid#fff}#navigation li a:hover{background:#383}#content{clear:left;padding:20px}#content h2{color:#000;font-size:160%;margin:0 0 .5em}#footer{background:#ccc;text-align:right;padding:20px;height:1%}div.xyexample{margin-left:25px;font-family:monospace;background-color:grey}body{font-family:Sans-Serif}#container{border-style:solid;border-width:1px}
+</style>
+</head>
+<body>
+<div id="container">
+<div id="header">
+<h1>The XY Problem</h1>
+</div>
+<div id="content">
+<h2>What is it ?</h2>
+<p>The XY problem is asking about your attempted <i>solution</i> rather than your actual <i>problem</i>. This leads to enormous amounts of wasted time and energy, both on the part of people asking for help, and on the part of those providing help.</p>
+<ul>
+<li>User wants to do X.</li>
+<li>User doesn't know how to do X, but thinks they can fumble their way to a solution if they can just manage to do Y.</li>
+<li>User doesn't know how to do Y either.</li>
+<li>User asks for help with Y.</li>
+<li>Others try to help user with Y, but are confused because Y seems like a strange problem to want to solve.</li>
+<li>After much interaction and wasted time, it finally becomes clear that the user really wants help with X, and that Y wasn't even a suitable solution for X.</li>
+</ul>
+<p>The problem occurs when people get stuck on what they believe is the solution and are unable step back and explain the issue in full.</p>
+<h2>What to do about it?</h2>
+<ol>
+<li>Always include information about a broader picture along with any attempted solution.</li>
+<li>If someone asks for more information, do provide details.</li>
+<li>If there are other solutions you've already ruled out, share why you've ruled them out. This gives more information about your requirements.</li>
+</ol>
+<p>Remember that if your diagnostic theories were accurate, you wouldn't be asking for help right?</p>
+<h2>Examples</h2>
+<h3>Example 1</h3>
+<p>
+n00b doesn't actually want the last 3 chracters in a filename, he wants the file extensions, so why ask for the last 3 characters?
+</p>
+<div class='xyexample'>
+<p>
+&lt;n00b&gt; How can I echo the last three characters in a filename?<br />
+&lt;feline&gt; If they're in a variable: echo ${foo: -3}<br />
+&lt;feline&gt; Why 3 characters? What do you REALLY want?<br />
+&lt;feline&gt; Do you want the extension?<br />
+&lt;n00b&gt; Yes.<br />
+&lt;feline&gt; There's no guarantee that every filename will have a three-letter extension,<br />
+&lt;feline&gt; so blindly grabbing three characters does not solve the problem.<br />
+&lt;feline&gt; echo ${foo##*.}<br />
+</p>
+</div>
+<h3>Example 2</h3>
+<p>
+If Angela had just started by explaining she wants to prevent others from detecting her OS, this could have been a much shorter and more productive discussion.
+</p>
+<div class='xyexample'>
+<p>
+Angela: 'nmap -O -A 127.0.0.1' returns some lines starting with 'OS:'. How to change it?<br />
+Obama: Look in the sourcecode for nmap, find how it figures out the Linux part, then rewrite your TCP/IP stack to not operate in a way nmap can detect.<br />
+Angela: Yeah, but I don't know about linux system api at all.<br />
+Obama: Well, nmap's fingerprint is based on the way the TCP/IP stack works, there's no real way except to rewrite the appropriate parts of said stack.<br />
+Angela: I really need to avoid these messages. Can iptables do this work?<br />
+Obama: Well, don't use OS detection or version scanning<br />
+Angela: I want to prevent others from knowing the type of my OS<br />
+</p>
+</div>
+</div>
+<div id="footer">
+<p>
+<a href='http://meta.stackoverflow.com/questions/66377/what-is-the-xy-problem'>Source 1</a> &middot;&middot;&middot;
+<a href='http://mywiki.wooledge.org/XyProblem'>Source 2</a>
+</p>
+</div>
+</div>
+</body>
+</html>
